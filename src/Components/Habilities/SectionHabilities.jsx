@@ -17,7 +17,7 @@ import ParticlesIcon from "../../assets/IconsSkills/ParticlesIcon.jsx";
 import FigmaIcon from "../../assets/IconsSkills/FigmaIcon.jsx";
 import BlenderIcon from "../../assets/IconsSkills/BlenderIcon.jsx";
 import AseSpriteIcon from "../../assets/IconsSkills/AseSpriteIcon.jsx";
-import SubstanceIcon from "../../assets/IconsSkills/SubstanceIcon.Jsx";
+import SubstanceIcon from "../../assets/IconsSkills/SubstanceIcon.jsx";
 
 import GithubIcon from "../../assets/Icons/GithubIcon.jsx"; 
 import IlustratorIcon from "../../assets/IconsSkills/IlustratorIcon.jsx";
