@@ -37,19 +37,50 @@ export const translations = {
     },
     projects: {
       title: "Proyectos",
-      button: "Ver Proyecto", // español
+      button: "Ver Proyecto",
     },
     habilities: {
-    skills_title: "HABILIDADES",
-    skills_dev: "Desarrollo",
-    skills_design: "Diseño",
-    skills_other: "Complementario",
-    skills_particles: "Partículas",
+      skills_title: "HABILIDADES",
+      skills_dev: "Desarrollo",
+      skills_design: "Diseño",
+      skills_other: "Complementario",
+      skills_particles: "Partículas",
     },
     contact: {
       title: "Contacto/Redes",
     },
+
+    // 🔋🔥 NUEVA SECCIÓN — FILL BATTERY GAME
+    fillBatteryGame: {
+      rechargeEnergy: "Recargar Energía",
+      powerUps: "POTENCIADORES",
+      buy: "Comprar",
+      level: "Nivel",
+
+      stats: {
+        totalEnergy: "Total Energía",
+        energyPerClick: "Recarga x Click",
+        autoClickBase: "Auto - Click Base",
+        autoClickBoost: "Auto - Click Mejora",
+        generatorsCollected: "Generadores Recolectados",
+      },
+
+      powerUpsList: {
+        multiplier: "Multiplicador",
+        multiplierDesc: "Aumenta energía por click - Costo:",
+
+        generator: "Generador",
+        generatorDesc: "Genera energía automáticamente - Costo:",
+
+        autoBoost: "AutoClick Mejora",
+        autoBoostDesc: "Mejora la generación automática - Costo:",
+      }
+    }
   },
+
+  // ---------------------------------------------------------------------------------------
+  // --------------------------------------- ENGLISH ---------------------------------------
+  // ---------------------------------------------------------------------------------------
   en: {
     navbar: {
       home: "Home",
@@ -87,18 +118,44 @@ export const translations = {
     },
     projects: {
       title: "Projects",
-      button: "View Project", // español
+      button: "View Project",
     },
     habilities: {
-    skills_title: "SKILLS",
-    skills_dev: "Development",
-    skills_design: "Design",
-    skills_other: "Complementary",
-    skills_particles: "Particles",
-
+      skills_title: "SKILLS",
+      skills_dev: "Development",
+      skills_design: "Design",
+      skills_other: "Complementary",
+      skills_particles: "Particles",
     },
     contact: {
       title: "Contact/Socials",
     },
-  },
+
+    // 🔋🔥 NEW SECTION — FILL BATTERY GAME
+    fillBatteryGame: {
+      rechargeEnergy: "Recharge Energy",
+      powerUps: "POWER UPS",
+      buy: "Buy",
+      level: "Level",
+
+      stats: {
+        totalEnergy: "Total Energy",
+        energyPerClick: "Energy per Click",
+        autoClickBase: "Auto Click Base",
+        autoClickBoost: "Auto Click Boost",
+        generatorsCollected: "Generators Collected",
+      },
+
+      powerUpsList: {
+        multiplier: "Multiplier",
+        multiplierDesc: "Increases energy per click - Cost:",
+
+        generator: "Generator",
+        generatorDesc: "Generates energy automatically - Cost:",
+
+        autoBoost: "AutoClick Boost",
+        autoBoostDesc: "Improves automatic generation - Cost:",
+      }
+    }
+  }
 };

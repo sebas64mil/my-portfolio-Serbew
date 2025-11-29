@@ -9,6 +9,8 @@ import Footer from "./Components/Footer/Footer.jsx";
 
 import { projectsData } from "./Data/projectsData.jsx";
 
+import FillBatteryGame from "./Game/FillBatteryGame.jsx";
+
 export default function App() {
   const [selectedProject, setSelectedProject] = useState(null);
 
@@ -50,7 +52,7 @@ export default function App() {
 
       <Navbar scrollToSection={scrollToSection} />
 
-
+      <FillBatteryGame />
 
       <div ref={aboutRef}><AboutSection /></div>
 
