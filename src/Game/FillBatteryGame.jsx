@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
-import PowerUpsContainer from "./Components/PowerUpsContainer";
-import PlayerStats from "./Components/PlayerStats";
-import BatteryPanel from "./Components/BatteryPanel";
+import PowerUpsContainer from "./Components/PowerUpsContainer.jsx";
+import PlayerStats from "./Components/PlayerStats.jsx";
+import BatteryPanel from "./Components/BatteryPanel.jsx";
 
 import BatteryEmpty from "../assets/Images/BatteryEmpty.png"; 
 import Battery25 from "../assets/Images/Baterry25percent.png"; 
