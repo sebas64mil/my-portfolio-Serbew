@@ -2,7 +2,7 @@ export default function IlustratorIcon({ className }) {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
-      viewBox="0 0 78 78"
+      viewBox="0 0 72 72"
       className={className}
       fill="currentColor"
     >

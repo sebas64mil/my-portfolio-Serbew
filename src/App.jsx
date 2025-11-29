@@ -50,6 +50,8 @@ export default function App() {
 
       <Navbar scrollToSection={scrollToSection} />
 
+
+
       <div ref={aboutRef}><AboutSection /></div>
 
       <div ref={projectsRef}>

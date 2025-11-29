@@ -58,7 +58,7 @@ export default function AboutSection() {
           <img
             src={ProfilePic}
             alt={`Foto de ${t.about.name}`}
-            className="w-full max-w-[350px] sm:max-w-[420px] lg:w-[460px] lg:h-[485px] rounded-2xl shadow-[0_0_8px_#5eead4]"
+            className="w-full max-w-[350px] sm:max-w-[420px] lg:w-[460px] lg:h-[520px] rounded-2xl shadow-[0_0_8px_#5eead4]"
           />
         </figure>
 
