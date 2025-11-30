@@ -2,12 +2,19 @@ import React from "react";
 import Button from "../../Components/Buttons/Button";
 import CountsBattery from "../IconsGame/CountsBattery.jsx";
 
+import { useLanguage } from "../../Data/LanguageContext.jsx"; // <-- import
+import { translations } from "../../Data/translations.js";
+
 export default function PowerUp({ 
   name = "Nombre potenciador", 
   amount = 5, 
   description = "Descripcion del potenciador que afectara la jugabilidad del clicker",
   onClick = () => {} // <- recibimos la función de compra
 }) {
+
+     const { language } = useLanguage();  // 👈 usado para traducir
+   const t = translations[language];   
+
   return (
     <div
       className="
@@ -42,7 +49,7 @@ export default function PowerUp({
           size="sm" 
           glow={false}
         >
-          Comprar
+          {t.fillBatteryGame.buy}
         </Button>
       </div>
     </div>
