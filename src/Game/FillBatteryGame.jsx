@@ -32,6 +32,15 @@ export default function FillBatteryGame() {
     const { language } = useLanguage();  // 👈 usado para traducir
   const t = translations[language];     // 👈 acceso rápido
 
+// Función para formatear números grandes
+const formatNumber = (num) => {
+  if (num >= 1e12) return (num / 1e12).toFixed(2) + "T"; // trillón
+  if (num >= 1e9)  return (num / 1e9).toFixed(2) + "B";   // billón
+  if (num >= 1e6)  return (num / 1e6).toFixed(2) + "M";   // millón
+  if (num >= 1e3)  return (num / 1e3).toFixed(2) + "K";   // mil
+  return num.toString();
+};
+
 
   // Estados
   const [energy, setEnergy] = useState(0);
@@ -70,7 +79,6 @@ levelUpAudio.play();
     setFullVisible(true);
 
     setTimeout(() => {
-      setEnergy(0);
       setMaxEnergy(prev => prev * 2);
       setLevel(prev => prev + 1);
 
@@ -240,14 +248,15 @@ clickAudio.play();
         className="w-full md:flex-1 h-full py-4 flex items-center justify-center bg-cover bg-center"
         style={{ backgroundImage: `url(${seccionStats})` }}
       >
-        <PlayerStats
-          level={level}
-          totalEnergy={`${energy}/${maxEnergy}`}
-          energyPerClick={multiplier}
-          autoClick={`${generators} /ciclo (${autoClickTime}s)`}
-          autoClickBoost={`x${autoGenMultiplier}`}
-          batteriesCollected={generators}
-        />
+<PlayerStats
+  level={level}
+  totalEnergy={`${formatNumber(energy)}/${formatNumber(maxEnergy)}`}
+  energyPerClick={formatNumber(multiplier)}
+  autoClick={`${generators} /ciclo (${autoClickTime}s)`}
+  autoClickBoost={`x${formatNumber(autoGenMultiplier)}`}
+  batteriesCollected={formatNumber(generators)}
+/>
+
       </div>
     </div>
   );

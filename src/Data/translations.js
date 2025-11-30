@@ -60,8 +60,8 @@ export const translations = {
       stats: {
         totalEnergy: "Total Energía",
         energyPerClick: "Recarga x Click",
-        autoClickBase: "Auto - Click Base",
-        autoClickBoost: "Auto - Click Mejora",
+        autoClickBase: " velocidad Auto-click",
+        autoClickBoost: "Recarga x Auto Click",
         generatorsCollected: "Generadores Recolectados",
       },
 
@@ -141,8 +141,8 @@ export const translations = {
       stats: {
         totalEnergy: "Total Energy",
         energyPerClick: "Energy per Click",
-        autoClickBase: "Auto Click Base",
-        autoClickBoost: "Auto Click Boost",
+        autoClickBase: "Auto-click speed",
+        autoClickBoost: "Recharge x Auto Click",
         generatorsCollected: "Generators Collected",
       },
 
