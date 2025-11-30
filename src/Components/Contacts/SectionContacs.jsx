@@ -24,7 +24,7 @@ export default function SectionContacts() {
   const t = translations[language];
 
   return (
-<section className="w-full flex justify-center py-8">
+<section className="w-full flex justify-center py-8 px-4">
   <div className="w-full max-w-2xl rounded-lg outline-4 -outline-offset-4 outline-teal-300 flex flex-col items-center gap-5 px-4 sm:px-6 py-6">
     <header className="w-full text-center border-b-4 border-teal-300 pb-5">
       <h2 className="text-4xl sm:text-5xl md:text-6xl font-bold font-['Oxanium'] text-teal-300 leading-[60px]">
