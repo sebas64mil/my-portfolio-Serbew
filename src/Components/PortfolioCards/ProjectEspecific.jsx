@@ -48,8 +48,9 @@ export default function ProjectEspecific({
         <div className="flex justify-between items-center w-full">
           
           {/* Nombre */}
-          <h1 className="text-6xl font-bold">{translatedTitle}</h1>
-
+      <h1 className="text-3xl sm:text-4xl md:text-6xl font-bold">
+        {translatedTitle}
+      </h1>
           {/* Botón acción */}
           <Button
             variant="light"
@@ -61,9 +62,9 @@ export default function ProjectEspecific({
         </div>
 
         {/* Descripción */}
-        <p className="text-2xl leading-9 max-w-5xl">
-          {translatedDescription}
-        </p>
+    <p className="text-lg sm:text-xl md:text-2xl leading-7 sm:leading-9 max-w-5xl">
+      {translatedDescription}
+    </p>
 
         {/* Categorías */}
         <div className="text-xl flex gap-2">
