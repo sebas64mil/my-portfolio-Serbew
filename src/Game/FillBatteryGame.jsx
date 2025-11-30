@@ -145,7 +145,7 @@ levelUpAudio.play();
   // 🔥 POWER UPS
   // -------------------------------
   const buyMultiplier = () => {
-    if (energy < multiplierCost || multiplier >= 10) return;
+    if (energy < multiplierCost) return;
 
     clickAudio.currentTime = 0;
 clickAudio.play();

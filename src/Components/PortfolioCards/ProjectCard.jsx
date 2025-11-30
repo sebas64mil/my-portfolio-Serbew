@@ -24,7 +24,12 @@ export default function ProjectCard({ onClick, ...rest }) {
       onMouseLeave={() => setHovering(false)}
       onClick={!isDisabled ? onClick : undefined}
       className={clsx(
-        "w-[305px] h-fit relative rounded-lg inline-flex flex-col overflow-hidden transition-shadow duration-300",
+        "h-fit relative rounded-lg inline-flex flex-col overflow-hidden transition-shadow duration-300",
+
+        // Mobile: 305px
+        // Tablet (lg): 260px
+        // Desktop (xl): 305px
+        "w-[305px] lg:w-[260px] xl:w-[305px]",
 
         !isDisabled && "cursor-pointer",
 
@@ -40,7 +45,14 @@ export default function ProjectCard({ onClick, ...rest }) {
     >
       {!isDisabled && (
         <img
-          className="self-stretch h-[289px] object-cover"
+          className={clsx(
+            "self-stretch object-cover",
+
+            // Mobile: 289px
+            // Tablet: más pequeño
+            // Desktop: vuelve a grande
+            "h-[289px] lg:h-60 xl:h-[289px]"
+          )}
           src={image}
           alt={title}
         />
@@ -56,7 +68,9 @@ export default function ProjectCard({ onClick, ...rest }) {
         <div className="self-stretch inline-flex justify-between items-center">
           <div
             className={clsx(
-              "text-xl font-extrabold font-['Oxanium'] leading-8",
+              "font-extrabold font-['Oxanium'] leading-8",
+              // Mobile → grande, Tablet → mediano, Desktop → grande
+              "text-xl lg:text-lg xl:text-xl",
               isDisabled ? "text-teal-500" : "text-teal-300"
             )}
           >
@@ -64,10 +78,15 @@ export default function ProjectCard({ onClick, ...rest }) {
           </div>
 
           {TitleIcon && (
-            <div className="w-8 h-8 flex items-center justify-center">
+            <div
+              className={clsx(
+                "flex items-center justify-center",
+                "w-8 h-8 lg:w-7 lg:h-7 xl:w-8 xl:h-8"
+              )}
+            >
               {React.cloneElement(TitleIcon, {
                 className: clsx(
-                  "w-6 h-6",
+                  "w-6 h-6 lg:w-5 lg:h-5 xl:w-6 xl:h-6",
                   isDisabled ? "text-teal-500" : "text-teal-300"
                 ),
               })}
@@ -77,8 +96,9 @@ export default function ProjectCard({ onClick, ...rest }) {
 
         <div
           className={clsx(
-            "self-stretch text-justify text-base font-normal font-['Oxanium'] leading-6",
+            "self-stretch text-justify font-normal font-['Oxanium'] leading-6",
             "line-clamp-3",
+            "text-base lg:text-sm xl:text-base",
             isDisabled ? "text-teal-500" : "text-teal-300"
           )}
         >
@@ -87,8 +107,9 @@ export default function ProjectCard({ onClick, ...rest }) {
 
         <div
           className={clsx(
-            "self-stretch text-base font-normal font-['Oxanium'] leading-6",
-            "whitespace-normal break-word line-clamp-1",
+            "self-stretch font-normal font-['Oxanium'] leading-6 whitespace-normal break-word",
+            "text-base lg:text-sm xl:text-base",
+            "line-clamp-1",
             isDisabled ? "text-teal-500" : "text-teal-300"
           )}
         >
@@ -97,9 +118,15 @@ export default function ProjectCard({ onClick, ...rest }) {
         </div>
 
         {!isDisabled && FloatingIcon && (
-          <div className="absolute top-3 right-3 bg-slate-950 rounded-2xl p-1 flex items-center justify-center">
+          <div
+            className={clsx(
+              "absolute bg-slate-950 rounded-2xl p-1 flex items-center justify-center",
+              "top-3 right-3 lg:top-2 lg:right-2"
+            )}
+          >
             {React.cloneElement(FloatingIcon, {
-              className: "w-7 h-7 text-teal-300",
+              className:
+                "text-teal-300 w-7 h-7 lg:w-6 lg:h-6 xl:w-7 xl:h-7",
             })}
           </div>
         )}

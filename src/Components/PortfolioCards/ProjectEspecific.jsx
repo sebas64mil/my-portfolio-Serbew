@@ -42,7 +42,7 @@ export default function ProjectEspecific({
       <div className="absolute inset-0 bg-linear-to-b from-transparent to-black/90"></div>
 
       {/* Contenido */}
-      <div className="relative h-full flex flex-col justify-end px-7 py-5 gap-4 max-w-7xl mx-auto">
+      <div className="relative h-full flex flex-col justify-end px-2 py-5 gap-4 max-w-7xl mx-auto">
         
         {/* Título + botón */}
         <div className="flex justify-between items-center w-full">
@@ -74,9 +74,9 @@ export default function ProjectEspecific({
 
         {/* Icono flotante */}
         {FloatingIcon && (
-          <div className="absolute top-4 right-4 bg-slate-950 rounded-2xl p-2">
+          <div className="absolute top-4 right-2 bg-slate-950 rounded-4xl p-2">
             {React.cloneElement(FloatingIcon, {
-              className: "w-10 h-10 text-teal-300",
+              className: "w-12 h-12 text-teal-300",
             })}
           </div>
         )}
