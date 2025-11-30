@@ -52,9 +52,11 @@ export default function App() {
 
       <Navbar scrollToSection={scrollToSection} />
 
-      <FillBatteryGame />
+      
 
       <div ref={aboutRef}><AboutSection /></div>
+
+      <FillBatteryGame />
 
       <div ref={projectsRef}>
         <ProjectsSection projects={projectsData} onSelectProject={handleSelectProject} />
