@@ -19,10 +19,10 @@ export const translations = {
       level: "21",
       rolesTitle: "Roles Secundarios",
       roles: [
-        "Game Designer (GDS)",
-        "VFX Apprentice (VFX)",
-        "Gameplay Programmer (GPR)",
-        "UX/UI Crafter for Games (UXU)"
+        "Diseñador de juegos",
+        "Creador de efectos visuales",
+        "Programador de jugabilidad ",
+        "Creador de UX/UI para juegos "
       ],
       skills: [
         { name: "Comunicación y trabajo en equipo", progress: 75 },
@@ -100,10 +100,10 @@ export const translations = {
       level: "21",
       rolesTitle: "Secondary Roles",
       roles: [
-        "Game Designer (GDS)",
-        "VFX Apprentice (VFX)",
-        "Gameplay Programmer (GPR)",
-        "UX/UI Crafter for Games (UXU)"
+        "Game Designer ",
+        "VFX creator",
+        "Gameplay Programmer",
+        "UX/UI Crafter for Games"
       ],
       skills: [
         { name: "Communication & Teamwork", progress: 75 },
