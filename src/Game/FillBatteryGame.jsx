@@ -63,6 +63,7 @@ const formatNumber = (num) => {
 
   const MIN_GEN_SPEED = 500; // 0.5s de mínimo
 const SPEED_REDUCTION = 0.90; // reduce 10% por generador
+const autoClickTimeNum = genSpeed / 1000; // tiempo en segundos
 
 
   // -------------------------------
@@ -197,19 +198,19 @@ clickAudio.play();
   const powerUps = [
     {
       name: t.fillBatteryGame.powerUpsList.multiplier,
-      amount: `x${multiplier}`,
+      amount: `x${multiplier+1}`,
       description: `${t.fillBatteryGame.powerUpsList.multiplierDesc} ${multiplierCost}`,
       buy: buyMultiplier
     },
     multiplier >= 3 && {
       name: t.fillBatteryGame.powerUpsList.generator,
-      amount: generators,
+      amount: `${(autoClickTimeNum * SPEED_REDUCTION).toFixed(1)}s`,
       description: `${t.fillBatteryGame.powerUpsList.generatorDesc} ${generatorCost}`,
       buy: buyGenerator
     },
     generators >= 2 && {
       name: t.fillBatteryGame.powerUpsList.autoBoost,
-      amount: `x${autoGenMultiplier}`,
+      amount: `x${autoGenMultiplier+1}`,
       description: `${t.fillBatteryGame.powerUpsList.autoBoostDesc} ${autoGenCost}`,
       buy: buyAutoGenBoost
     }

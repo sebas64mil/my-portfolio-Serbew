@@ -13,7 +13,7 @@ export const translations = {
       title: "Ingeniero Multimedia",
       name: "Juan Sebastian Rincon Villamil",
       description:
-        "Soy estudiante de Ingeniería Multimedia enfocado en crear experiencias interactivas e inmersivas. Combino programación, diseño visual, UI/UX y VFX, con una base sólida en arte 2D/3D y desarrollo de videojuegos.",
+        "Ingenierío Multimedia, especializado en experiencias interactivas e inmersivas. programación, UI/UX y VFX, integrando diversas tecnologías, Mi enfoque en Game Design permite desarrollar juegos atractivos, jugables y con guía clara para el jugador.",
       cvButton: "Ver CV",
       alignments: "Creatividad, diseño y desarrollo",
       level: "21",
@@ -94,7 +94,7 @@ export const translations = {
       title: "Multimedia Engineer",
       name: "Juan Sebastian Rincon Villamil",
       description:
-        "I’m a Multimedia Engineering student focused on creating interactive and immersive experiences. I combine programming, visual design, UI/UX, and VFX, supported by a strong foundation in 2D/3D art and game development.",
+        "Multimedia Engineer, specialized in interactive and immersive experiences. Programming, UI/UX, and VFX, integrating diverse technologies. My focus on Game Design allows me to develop engaging, playable games with clear player guidance.",
       cvButton: "View CV",
       alignments: "Creativity, design, and development",
       level: "21",
