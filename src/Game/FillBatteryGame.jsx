@@ -53,7 +53,7 @@ export default function FillBatteryGame() {
   const isLevelingRef = useRef(false);
 
   const MIN_GEN_SPEED = 500; // 0.5s de mínimo
-const SPEED_REDUCTION = 0.95; // reduce 5% por generador
+const SPEED_REDUCTION = 0.90; // reduce 10% por generador
 
 
   // -------------------------------
@@ -153,7 +153,7 @@ clickAudio.play();
 
     setEnergy(prev => prev - multiplierCost);
     setMultiplier(m => m + 1);
-    setMultiplierCost(c => Math.floor(c * 2.5));
+    setMultiplierCost(c => Math.floor(c * 1.5));
   };
 
   const buyGenerator = () => {
@@ -165,7 +165,7 @@ clickAudio.play();
 
     setEnergy(prev => prev - generatorCost);
     setGenerators(g => g + 1);
-    setGeneratorCost(c => Math.floor(c * 3.5));
+    setGeneratorCost(c => Math.floor(c * 1.7));
       // 🔥 Reducción de velocidad del ciclo
   setGenSpeed(prev => Math.max(MIN_GEN_SPEED, prev * SPEED_REDUCTION));
   };
@@ -180,7 +180,7 @@ clickAudio.play();
 
     setEnergy(prev => prev - autoGenCost);
     setAutoGenMultiplier(m => m + 1); // suma x1
-    setAutoGenCost(c => Math.floor(c * 5.8));
+    setAutoGenCost(c => Math.floor(c * 1.9));
   };
 
   const autoClickTime = (genSpeed / 1000).toFixed(1);
