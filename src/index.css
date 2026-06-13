@@ -1,8 +1,440 @@
 @import "tailwindcss";
 
+/* ============================================================
+   SISTEMA DE DISEÑO — ESTÉTICA DE BOCETO / BLUEPRINT
+   ============================================================ */
+
+:root {
+  /* Colores principales */
+  --sketch-bg: #0a0a0c;
+  --sketch-bg-light: #111115;
+  --sketch-line: #1a1a22;
+  --sketch-primary: #00f0ff;
+  --sketch-secondary: #d94cff;
+  --sketch-text: #e0e0e8;
+  --sketch-text-dim: #6b6b7b;
+  --sketch-border: #00f0ff33;
+  --sketch-border-solid: #00f0ff66;
+  --sketch-glow: 0 0 12px rgba(0, 240, 255, 0.25);
+
+  /* Tipografías */
+  --font-sketch: 'Architects Daughter', cursive;
+  --font-mono: 'JetBrains Mono', monospace;
+}
+
+/* --- Reset & Globals --- */
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
 body {
   margin: 0;
-  padding: 0;
-  font-family: 'Oxanium', sans-serif;
-  background-color: #020617;
+  min-height: 100vh;
+  background-color: var(--sketch-bg);
+  color: var(--sketch-text);
+  font-family: var(--font-mono);
+  font-weight: 300;
+  line-height: 1.6;
+
+  /* Fondo cuadrícula blueprint */
+  background-image:
+    linear-gradient(var(--sketch-line) 1px, transparent 1px),
+    linear-gradient(90deg, var(--sketch-line) 1px, transparent 1px);
+  background-size: 40px 40px;
+}
+
+/* --- Tipografía Sketch --- */
+
+.font-sketch {
+  font-family: var(--font-sketch);
+}
+
+.font-mono {
+  font-family: var(--font-mono);
+}
+
+.text-glow {
+  text-shadow: 0 0 8px rgba(0, 240, 255, 0.5), 0 0 20px rgba(0, 240, 255, 0.2);
+}
+
+/* --- Bordes estilo Boceto --- */
+
+.border-sketch {
+  border: 1px dashed var(--sketch-border-solid);
+}
+
+.border-sketch-subtle {
+  border: 1px dashed var(--sketch-border);
+}
+
+.border-sketch-dotted {
+  border: 1px dotted var(--sketch-border-solid);
+}
+
+/* --- Cajas Blueprint --- */
+
+.sketch-card {
+  background: rgba(10, 10, 12, 0.7);
+  backdrop-filter: blur(8px);
+  border: 1px dashed var(--sketch-border-solid);
+  border-radius: 4px;
+  position: relative;
+}
+
+.sketch-card::before {
+  content: '';
+  position: absolute;
+  top: -3px;
+  left: -3px;
+  right: -3px;
+  bottom: -3px;
+  border: 1px dotted var(--sketch-border);
+  border-radius: 6px;
+  pointer-events: none;
+}
+
+/* --- Botón Sketch --- */
+
+.sketch-btn {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--sketch-primary);
+  background: transparent;
+  border: 1px dashed var(--sketch-border-solid);
+  padding: 0.5rem 1.2rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+}
+
+.sketch-btn:hover {
+  background: rgba(0, 240, 255, 0.08);
+  box-shadow: var(--sketch-glow);
+  border-style: solid;
+}
+
+.sketch-btn.active {
+  background: rgba(0, 240, 255, 0.12);
+  border-style: solid;
+  box-shadow: var(--sketch-glow);
+}
+
+/* --- Línea Decorativa (trazo dibujado) --- */
+
+.sketch-line {
+  height: 1px;
+  background: repeating-linear-gradient(
+    90deg,
+    var(--sketch-border-solid) 0px,
+    var(--sketch-border-solid) 6px,
+    transparent 6px,
+    transparent 12px
+  );
+}
+
+/* --- Animación de trazo SVG --- */
+
+@keyframes sketch-draw {
+  from {
+    stroke-dashoffset: 1000;
+  }
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+.sketch-draw-line {
+  stroke-dasharray: 1000;
+  animation: sketch-draw 2s ease forwards;
+}
+
+/* --- Animación de aparición --- */
+
+@keyframes sketch-fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.sketch-fade-up {
+  animation: sketch-fade-up 0.6s ease forwards;
+}
+
+/* --- Animación de parpadeo neón sutil --- */
+
+@keyframes neon-flicker {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.85; }
+  75% { opacity: 0.95; }
+}
+
+.neon-flicker {
+  animation: neon-flicker 3s ease-in-out infinite;
+}
+
+/* --- Scrollbar personalizada --- */
+
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--sketch-bg);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--sketch-border-solid);
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--sketch-primary);
+}
+
+/* ============================================================
+   BOTONES FANCY — ESTÉTICA CYBER-SKETCH DE PLANOS
+   ============================================================ */
+
+.btn-fancy-primary,
+.btn-fancy-secondary {
+  background-color: transparent;
+  border-radius: 0;
+  box-sizing: border-box;
+  cursor: pointer;
+  display: inline-block;
+  font-family: var(--font-mono);
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  margin: 0;
+  outline: none;
+  overflow: visible;
+  position: relative;
+  text-align: center;
+  text-decoration: none;
+  text-transform: uppercase;
+  transition: all 0.3s ease-in-out;
+  user-select: none;
+}
+
+/* Colores de variantes */
+.btn-fancy-primary {
+  border: 1.5px solid var(--sketch-primary);
+  color: var(--sketch-primary);
+}
+
+.btn-fancy-secondary {
+  border: 1.5px solid var(--sketch-secondary);
+  color: var(--sketch-secondary);
+}
+
+/* Trazo interior estilo boceto */
+.btn-fancy-primary::before,
+.btn-fancy-secondary::before {
+  content: " ";
+  height: 1.5px;
+  top: 50%;
+  position: absolute;
+  transform: translateY(-50%);
+  transform-origin: center;
+  transition: background 0.3s linear, width 0.3s linear;
+}
+
+.btn-fancy-primary::before {
+  background: var(--sketch-primary);
+}
+
+.btn-fancy-secondary::before {
+  background: var(--sketch-secondary);
+}
+
+/* Texto del botón */
+.btn-fancy-primary .btn-text,
+.btn-fancy-secondary .btn-text {
+  line-height: 1.2;
+  display: block;
+  text-align: left;
+  transition: all 0.3s ease-in-out;
+  text-decoration: none;
+}
+
+.btn-fancy-primary .btn-text {
+  color: var(--sketch-primary);
+}
+
+.btn-fancy-secondary .btn-text {
+  color: var(--sketch-secondary);
+}
+
+/* Gaps de líneas (keys) usando el color de fondo para enmascarar */
+.btn-fancy-primary .top-key,
+.btn-fancy-secondary .top-key {
+  height: 2.5px;
+  top: -2px;
+  position: absolute;
+  background: var(--sketch-bg);
+  transition: width 0.5s ease-out, left 0.3s ease-out;
+}
+
+.btn-fancy-primary .bottom-key-1,
+.btn-fancy-secondary .bottom-key-1 {
+  height: 2.5px;
+  bottom: -2.5px;
+  position: absolute;
+  background: var(--sketch-bg);
+  transition: width 0.5s ease-out, right 0.3s ease-out;
+}
+
+.btn-fancy-primary .bottom-key-2,
+.btn-fancy-secondary .bottom-key-2 {
+  height: 2.5px;
+  bottom: -2.5px;
+  position: absolute;
+  background: var(--sketch-bg);
+  transition: width 0.5s ease-out, right 0.3s ease-out;
+}
+
+/* Tamaños de Botones */
+/* Pequeño (Navbar) */
+.btn-sm {
+  padding: 0.35rem 0.9rem;
+  font-size: 10px;
+}
+.btn-sm::before {
+  left: 0.8rem;
+  width: 0.75rem;
+}
+.btn-sm .btn-text {
+  padding-left: 1rem;
+}
+.btn-sm:hover .btn-text {
+  padding-left: 0.65rem;
+}
+.btn-sm .top-key {
+  width: 0.8rem;
+  left: 0.5rem;
+}
+.btn-sm .bottom-key-1 {
+  width: 0.8rem;
+  right: 1.2rem;
+}
+.btn-sm .bottom-key-2 {
+  width: 0.3rem;
+  right: 0.4rem;
+}
+
+/* Mediano (Normal) */
+.btn-md {
+  padding: 0.6rem 1.4rem;
+  font-size: 11px;
+}
+.btn-md::before {
+  left: 1.2rem;
+  width: 1.2rem;
+}
+.btn-md .btn-text {
+  padding-left: 1.6rem;
+}
+.btn-md:hover .btn-text {
+  padding-left: 1.1rem;
+}
+.btn-md .top-key {
+  width: 1.2rem;
+  left: 0.6rem;
+}
+.btn-md .bottom-key-1 {
+  width: 1.2rem;
+  right: 1.8rem;
+}
+.btn-md .bottom-key-2 {
+  width: 0.5rem;
+  right: 0.6rem;
+}
+
+/* Grande */
+.btn-lg {
+  padding: 0.9rem 2rem;
+  font-size: 13px;
+}
+.btn-lg::before {
+  left: 1.5rem;
+  width: 1.56rem;
+}
+.btn-lg .btn-text {
+  padding-left: 2rem;
+}
+.btn-lg:hover .btn-text {
+  padding-left: 1.5rem;
+}
+.btn-lg .top-key {
+  width: 1.56rem;
+  left: 0.625rem;
+}
+.btn-lg .bottom-key-1 {
+  width: 1.56rem;
+  right: 1.875rem;
+}
+.btn-lg .bottom-key-2 {
+  width: 0.625rem;
+  right: 0.625rem;
+}
+
+/* Estados de Hover */
+.btn-fancy-primary:hover {
+  color: var(--sketch-bg) !important;
+  background: var(--sketch-primary);
+  box-shadow: 0 0 12px rgba(0, 240, 255, 0.4);
+}
+
+.btn-fancy-secondary:hover {
+  color: var(--sketch-bg) !important;
+  background: var(--sketch-secondary);
+  box-shadow: 0 0 12px rgba(217, 76, 255, 0.4);
+}
+
+.btn-fancy-primary:hover::before,
+.btn-fancy-secondary:hover::before {
+  width: 0px;
+}
+
+.btn-fancy-primary:hover .btn-text {
+  color: var(--sketch-bg) !important;
+}
+
+.btn-fancy-secondary:hover .btn-text {
+  color: var(--sketch-bg) !important;
+}
+
+.btn-fancy-primary:hover .top-key,
+.btn-fancy-secondary:hover .top-key {
+  left: -2px;
+  width: 0px;
+}
+
+.btn-fancy-primary:hover .bottom-key-1,
+.btn-fancy-primary:hover .bottom-key-2,
+.btn-fancy-secondary:hover .bottom-key-1,
+.btn-fancy-secondary:hover .bottom-key-2 {
+  right: 0;
+  width: 0;
+}
+
+/* Botón del menú activo */
+.active-nav-btn {
+  background: rgba(0, 240, 255, 0.08);
+}
+.btn-fancy-secondary.active-nav-btn {
+  background: rgba(217, 76, 255, 0.08);
 }
