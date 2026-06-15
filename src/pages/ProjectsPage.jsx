@@ -15,8 +15,8 @@ export default function ProjectsPage() {
   const items = tab === 'web' ? webProjects : gameProjects;
 
   const localLinks = [
-    { href: '#web', label: 'Web' },
-    { href: '#games', label: 'Videojuegos' }
+    { href: '#projects', label: 'Proyectos' },
+    { href: '#experimentos', label: 'Experimentos' }
   ];
 
   const pageLinks = [
@@ -49,7 +49,7 @@ export default function ProjectsPage() {
           </div>
 
           {/* Carousel for selected category */}
-          <div>
+          <div id="projects" style={{ scrollMarginTop: '96px' }}>
             {items && items.length > 0 ? (
               <CardCarousel items={items} />
             ) : (
@@ -59,17 +59,25 @@ export default function ProjectsPage() {
             )}
           </div>
 
-          {/* Roadmap / Hoja de ruta */}
-          <div className="mt-12">
-            <div className="relative sketch-card overflow-hidden p-6" style={{ minHeight: '260px' }}>
-              <ParticlesBackground color="#00f0ff" count={300} blur={3} />
+          {/* Separator between sections */}
+          <div style={{ borderTop: '1px dashed rgba(0,240,255,0.08)', marginTop: '18px' }} />
 
-              <div className="relative z-10">
-                <Roadmap initial={tab === 'games' ? 'crash' : 'crash'} />
+          {/* Roadmap / Experimentos técnicos */}
+          <div id="experimentos" className="mt-12" style={{ scrollMarginTop: '96px' }}>
+            <h2 className="font-sketch text-2xl text-glow" style={{ color: 'var(--sketch-primary)' }}>Experimentos técnicos</h2>
+            <p className="font-mono text-sm mt-2 text-[var(--sketch-text-dim)]">Este apartado es para recrear mecánicas, sistemas de videojuegos y aprendizaje del desarrollo de software.</p>
+
+            <div className="mt-4">
+              <div className="relative sketch-card overflow-hidden p-6" style={{ minHeight: '260px' }}>
+                <ParticlesBackground color="#00f0ff" count={300} blur={3} />
+
+                <div className="relative z-10">
+                  <Roadmap initial={tab === 'games' ? 'crash' : 'crash'} />
+                </div>
               </div>
+              {/* Separator below roadmap */}
+              <div style={{ borderTop: '1px dashed rgba(0,240,255,0.08)', marginTop: '18px' }} />
             </div>
-            {/* Separator below roadmap */}
-            <div style={{ borderTop: '1px dashed rgba(0,240,255,0.08)', marginTop: '18px' }} />
           </div>
 
 

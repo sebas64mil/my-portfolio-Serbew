@@ -43,9 +43,7 @@ export default function ContactPage() {
 
  
           {/* Services anchor and container (split: description + image placeholder) */}
-          <div id="services" />
-
-          <div className="text-center my-6">
+          <div id="services" className="text-center my-6" style={{ scrollMarginTop: '96px' }}>
             <h2 className="font-sketch text-2xl text-glow" style={{ color: 'var(--sketch-primary)' }}>Servicios</h2>
             <div className="sketch-line mx-auto w-28 mt-2" />
           </div>
@@ -78,9 +76,9 @@ export default function ContactPage() {
             </div>
           </div>
 
-          <div id="socials" />
+          <div style={{ borderTop: '1px dashed rgba(0,240,255,0.08)', marginTop: '18px' }} />
 
-          <div className="text-center my-6">
+          <div id="socials" className="text-center my-6" style={{ scrollMarginTop: '96px' }}>
             <h2 className="font-sketch text-2xl text-glow" style={{ color: 'var(--sketch-primary)' }}>Redes Sociales</h2>
             <div className="sketch-line mx-auto w-28 mt-2" />
           </div>

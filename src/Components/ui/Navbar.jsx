@@ -57,13 +57,14 @@ export default function Navbar({ localLinks, pageLinks, basePath }) {
           {siteData.nickname}
         </Link>
 
-        {/* Links */}
-        <div className="flex items-center gap-1 md:gap-2">
-          {/* Links locales (scroll) or page hashes */}
-          {local.map((link) => {
+        {/* spacer */}
+        <div className="flex-1" />
+
+        {/* Right cluster: first 3 local links, peek and page links */}
+        <div className="flex items-center gap-2">
+          {local.slice(0, 3).map((link) => {
             const href = link.href || '#';
             const isActive = location.pathname === (basePath || '/') && location.hash === href;
-            // If href looks like an anchor (starts with '#'), render as href so it navigates on same page
             return (
               <Button
                 key={href}
@@ -71,17 +72,17 @@ export default function Navbar({ localLinks, pageLinks, basePath }) {
                 onClick={(e) => handleLocalClick(e, href)}
                 variant="fancy-primary"
                 size="sm"
-                className={isActive ? 'active-nav-btn' : ''}
+                className={`${isActive ? 'active-nav-btn' : ''}`}
               >
                 {link.label}
               </Button>
             );
           })}
 
-          {/* Separador vertical */}
-          <div className="w-px h-5 mx-1" style={{ background: 'var(--sketch-border-solid)' }} />
+          {local[3] && <div className="ml-1 opacity-60 select-none text-[12px] font-mono hidden md:block">…</div>}
 
-          {/* Links de página (React Router) */}
+          <div className="w-px h-5 mx-2" style={{ background: 'var(--sketch-border-solid)' }} />
+
           {pages.map((link) => {
             const isActive = location.pathname === link.path;
             return (

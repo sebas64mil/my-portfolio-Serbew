@@ -7,6 +7,9 @@ import SkillTree from '../Components/ui/SkillTree';
 import WireframeScene from '../Components/graphics/WireframeScene';
 import GridBackground from '../Components/graphics/GridBackground';
 import Button from '../Components/ui/Button';
+import StatCard from '../Components/ui/StatCard';
+import GoalCard from '../Components/ui/GoalCard';
+import EducationItem from '../Components/ui/EducationItem';
 import { FaGithub, FaLinkedin, FaInstagram, FaGamepad, FaFileAlt } from 'react-icons/fa';
 
 const GRID_COLORS = [
@@ -17,6 +20,23 @@ export default function HomePage() {
   const sceneRef = useRef(null);
   const location = useLocation();
   const [gridColor, setGridColor] = useState('#00f0ff');
+
+  // visibility and stats animation state
+  const [visible, setVisible] = useState({});
+  const [statsCounts, setStatsCounts] = useState({ years: 0, projects: 0, jams: 0 });
+
+  // current section for right-side indicator
+  const [currentSection, setCurrentSection] = useState('Inicio');
+
+  const localLinks = [
+    { href: '#hero', label: 'Inicio' },
+    { href: '#about', label: 'Sobre mí' },
+    { href: '#skills', label: 'Herramientas' },
+    { href: '#featured', label: 'Featured' },
+    { href: '#stats', label: 'Estadísticas' },
+    { href: '#goals', label: 'Metas' },
+    { href: '#education', label: 'Educación' },
+  ];
 
   const handleExportScene = () => {
     if (sceneRef.current) {
@@ -37,9 +57,84 @@ export default function HomePage() {
     }
   }, [location.hash, location.pathname]);
 
+  // Observe sections to trigger simple reveal animations
+  useEffect(() => {
+    const els = document.querySelectorAll('.home-animate');
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach((e) => {
+        if (e.isIntersecting) {
+          const id = e.target.id || e.target.dataset.key;
+          setVisible((v) => ({ ...v, [id]: true }));
+          io.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.15 });
+
+    els.forEach((el) => io.observe(el));
+    return () => io.disconnect();
+  }, []);
+
+  // Animate stats when stats section becomes visible
+  useEffect(() => {
+    if (!visible.stats) return;
+    const targets = { years: 3, projects: 12, jams: 5 };
+    const duration = 900; // ms
+    const start = performance.now();
+
+    function step(now) {
+      const t = Math.min((now - start) / duration, 1);
+      setStatsCounts({
+        years: Math.floor(targets.years * t),
+        projects: Math.floor(targets.projects * t),
+        jams: Math.floor(targets.jams * t),
+      });
+      if (t < 1) requestAnimationFrame(step);
+      else setStatsCounts(targets);
+    }
+    requestAnimationFrame(step);
+  }, [visible.stats]);
+
+  // Scroll spy to update current section indicator
+  useEffect(() => {
+    const ids = ['hero','about','skills','featured','stats','goals','education'];
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach((e) => {
+        if (e.isIntersecting) setCurrentSection(e.target.id || '');
+      });
+    }, { threshold: 0.6 });
+
+    ids.forEach((id) => {
+      const el = document.getElementById(id);
+      if (el) io.observe(el);
+    });
+    return () => io.disconnect();
+  }, []);
+
   return (
     <div className="relative w-full min-h-screen" style={{ background: 'var(--sketch-bg)' }}>
-      <Navbar />
+      <Navbar localLinks={localLinks} />
+
+      {/* Right-side vertical section nav (not inside navbar) */}
+      <div className="hidden lg:flex flex-col items-end gap-3 fixed right-3 top-1/2 transform -translate-y-1/2 z-50">
+        {localLinks.map((link) => {
+          const id = (link.href || '').replace('#', '');
+          const active = currentSection === id;
+          return (
+            <button
+              key={link.href}
+              onClick={() => {
+                const el = document.querySelector(link.href);
+                if (el) el.scrollIntoView({ behavior: 'smooth' });
+                window.history.pushState(null, '', link.href);
+              }}
+              className={`text-right font-mono text-sm px-2 transition-colors ${active ? 'text-[var(--sketch-primary)]' : 'text-[var(--sketch-text-dim)] hover:text-[var(--sketch-primary)]'}`}
+            >
+              <span className="block">{link.label}</span>
+              <span className={`block h-[2px] bg-[var(--sketch-primary)] mt-1 transition-all ${active ? 'w-full' : 'w-0'}`} />
+            </button>
+          );
+        })}
+      </div>
 
       {/* ========== HERO ========== */}
       <section
@@ -225,6 +320,94 @@ export default function HomePage() {
           </div>
 
           <SkillTree />
+        </div>
+      </section>
+
+      {/* ========== FEATURED / CTA ========== */}
+      <section id="featured" className="home-animate relative py-24 px-6 overflow-hidden" style={{ scrollMarginTop: '96px' }}>
+        <GridBackground color={gridColor} />
+        <div className="max-w-6xl mx-auto relative z-10">
+          <div className="flex items-center gap-4 mb-6">
+            <div className="sketch-line flex-1" />
+            <h2 className="font-sketch text-3xl tracking-wider text-glow" style={{ color: 'var(--sketch-primary)' }}>Featured Project</h2>
+            <div className="sketch-line flex-1" />
+          </div>
+
+          <div className="sketch-card p-6 mb-6" style={{ backdropFilter: 'blur(6px)' }}>
+            <h3 className="font-sketch text-2xl" style={{ color: 'var(--sketch-primary)' }}>Featured Project</h3>
+            <p className="font-mono text-sm mt-3 text-[var(--sketch-text-dim)]">A showcase of one of my most representative projects, highlighting both technical implementation and game design decisions.</p>
+            <div className="mt-4">
+              <Button variant="fancy-primary" size="md" onClick={() => { window.location.href = '/projects#projects'; }}>View Projects</Button>
+            </div>
+
+            <div className="mt-6 w-full bg-black rounded-md overflow-hidden" style={{ minHeight: '320px' }}>
+              {/* Video/embed placeholder */}
+              <div className="w-full h-full flex items-center justify-center text-[12px] font-mono text-[var(--sketch-text-dim)]">Video showcase placeholder — replace with &lt;iframe&gt; or &lt;video&gt;</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ========== STATISTICS ========== */}
+      <section id="stats" className="home-animate relative py-16 px-6 overflow-hidden" style={{ scrollMarginTop: '96px' }}>
+        <GridBackground color={gridColor} />
+        <div className="max-w-6xl mx-auto relative z-10">
+          <div className="flex items-center gap-4 mb-6">
+            <div className="sketch-line flex-1" />
+            <h2 className="font-sketch text-2xl tracking-wider text-glow" style={{ color: 'var(--sketch-primary)' }}>Estadísticas</h2>
+            <div className="sketch-line flex-1" />
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <StatCard value={statsCounts.years} label="Years Learning Game Development" />
+            <StatCard value={statsCounts.projects} label="Projects Completed" />
+            <StatCard value={statsCounts.jams} label="Game Jams Participated In" />
+          </div>
+        </div>
+      </section>
+
+      {/* ========== GOALS ========== */}
+      <section id="goals" className="home-animate relative py-16 px-6 overflow-hidden" style={{ scrollMarginTop: '96px' }}>
+        <GridBackground color={gridColor} />
+        <div className="max-w-6xl mx-auto relative z-10">
+          <div className="flex items-center gap-4 mb-6">
+            <div className="sketch-line flex-1" />
+            <h2 className="font-sketch text-2xl tracking-wider text-glow" style={{ color: 'var(--sketch-primary)' }}>Current Goals</h2>
+            <div className="sketch-line flex-1" />
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            {[
+              { title: 'Reach B2 English Level', desc: 'Improve fluency and technical communication.', priority: 'High' },
+              { title: 'Publish Second Complete Game', desc: 'Ship a full game on itch.io with analytics.', priority: 'High' },
+              { title: 'Improve Three.js Skills', desc: 'Learn advanced rendering and optimization.', priority: 'Medium' },
+              { title: 'Learn Advanced Game Architecture', desc: 'Study ECS, decoupled systems and tools.', priority: 'Low' },
+            ].map((g, i) => (
+              <GoalCard key={i} title={g.title} desc={g.desc} priority={g.priority} />
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ========== EDUCATION & LEARNING ========== */}
+      <section id="education" className="home-animate relative py-16 px-6 overflow-hidden" style={{ scrollMarginTop: '96px' }}>
+        <GridBackground color={gridColor} />
+        <div className="max-w-6xl mx-auto relative z-10">
+          <div className="flex items-center gap-4 mb-6">
+            <div className="sketch-line flex-1" />
+            <h2 className="font-sketch text-2xl tracking-wider text-glow" style={{ color: 'var(--sketch-primary)' }}>Education & Learning</h2>
+            <div className="sketch-line flex-1" />
+          </div>
+
+          <div className="space-y-4">
+            {[
+              { institution: 'Universidad de Ejemplo', program: 'Licenciatura en Informática', date: '2018 - 2022', desc: 'Estudios formales en ciencias de la computación.' },
+              { institution: 'Curso Three.js Avanzado', program: 'Curso Online', date: '2024', desc: 'Renderizado avanzado y optimización.' },
+              { institution: 'Game Jam XYZ', program: 'Participación', date: '2023', desc: 'Prototipado rápido y teamwork.' },
+            ].map((e, i) => (
+              <EducationItem key={i} institution={e.institution} program={e.program} date={e.date} desc={e.desc} />
+            ))}
+          </div>
         </div>
       </section>
 

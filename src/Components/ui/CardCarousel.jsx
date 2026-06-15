@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import Button from './Button';
+import Card from './Card';
 
 // Flex-based 3-item carousel: prev - current - next centered and responsive
 export default function CardCarousel({ items = [], className = '' }) {
@@ -38,19 +39,11 @@ export default function CardCarousel({ items = [], className = '' }) {
 
           {/* Previous */}
           <div className="w-64 md:w-72 opacity-80 scale-95 transition-all duration-300">
-            <div className="sketch-card p-4 text-left">
-              <div className="text-sm font-mono opacity-80">
-                {items[prev].category}
-              </div>
-
-              <h4 className="font-sketch text-lg mt-2">
-                {items[prev].title}
-              </h4>
-
-              <p className="font-mono text-xs mt-2 text-[var(--sketch-text-dim)] truncate">
-                {items[prev].summary}
-              </p>
-            </div>
+            <Card
+              category={items[prev].category}
+              title={items[prev].title}
+              summary={items[prev].summary}
+            />
           </div>
 
           {/* Current */}
@@ -58,39 +51,21 @@ export default function CardCarousel({ items = [], className = '' }) {
             className="w-80 md:w-96 transition-all duration-300"
             style={{ zIndex: 20 }}
           >
-            <div
-              className="sketch-card p-6 text-left"
-              style={{ boxShadow: 'var(--sketch-glow)' }}
-            >
-              <div className="text-sm font-mono opacity-90">
-                {items[index].category}
-              </div>
-
-              <h3 className="font-sketch text-2xl mt-2">
-                {items[index].title}
-              </h3>
-
-              <p className="font-mono text-sm mt-3 text-[var(--sketch-text-dim)]">
-                {items[index].summary}
-              </p>
-            </div>
+            <Card
+              category={items[index].category}
+              title={items[index].title}
+              summary={items[index].summary}
+              featured
+            />
           </div>
 
           {/* Next */}
           <div className="w-64 md:w-72 opacity-80 scale-95 transition-all duration-300">
-            <div className="sketch-card p-4 text-left">
-              <div className="text-sm font-mono opacity-80">
-                {items[next].category}
-              </div>
-
-              <h4 className="font-sketch text-lg mt-2">
-                {items[next].title}
-              </h4>
-
-              <p className="font-mono text-xs mt-2 text-[var(--sketch-text-dim)] truncate">
-                {items[next].summary}
-              </p>
-            </div>
+            <Card
+              category={items[next].category}
+              title={items[next].title}
+              summary={items[next].summary}
+            />
           </div>
 
         </div>
