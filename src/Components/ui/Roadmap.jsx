@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect, useCallback } from 'react';
+import React, { useState, useRef, useEffect, useCallback, useMemo } from 'react';
 import { roadmaps } from '../../data/roadmapData';
 import Button from './Button';
 
@@ -13,6 +13,7 @@ export default function Roadmap({ initial = 'crash' }) {
   const [activeNode, setActiveNode] = useState(null);
   const [lines, setLines] = useState([]);
   const [animate, setAnimate] = useState(false);
+  const [viewportWidth, setViewportWidth] = useState(typeof window !== 'undefined' ? window.innerWidth : 1200);
   const containerRef = useRef(null);
   const nodeRefs = useRef({});
 
@@ -22,6 +23,24 @@ export default function Roadmap({ initial = 'crash' }) {
     setMapState(JSON.parse(JSON.stringify(m)));
     setActiveNode(null);
   }, [selected]);
+
+  useEffect(() => {
+    const handleResize = () => setViewportWidth(window.innerWidth);
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
+  const compactLayout = viewportWidth < 1024;
+  const itemsPerRow = viewportWidth < 480 ? 1 : 2;
+
+  const compactRows = useMemo(() => {
+    if (!compactLayout) return [];
+    const rows = [];
+    for (let i = 0; i < mapState.nodes.length; i += itemsPerRow) {
+      rows.push(mapState.nodes.slice(i, i + itemsPerRow));
+    }
+    return rows;
+  }, [compactLayout, itemsPerRow, mapState.nodes]);
 
   const calcLines = useCallback(() => {
     const cont = containerRef.current;
@@ -84,23 +103,39 @@ export default function Roadmap({ initial = 'crash' }) {
   return (
     <div className="w-full">
       {/* Map selector buttons (use project's Button component) */}
-      <div className="flex items-center gap-3 mb-3">
-        {roadmaps.map((r) => (
-          <Button
-            key={r.id}
-            variant={selected === r.id ? 'fancy-primary' : 'fancy-secondary'}
-            size="sm"
-            onClick={() => setSelected(r.id)}
-          >
-            {r.title}
-          </Button>
-        ))}
-      </div>
+<div className="mb-3 overflow-x-auto scrollbar-thin">
+  <div className="flex gap-3 min-w-max pb-2">
+    {roadmaps.map((r) => (
+      <Button
+        key={r.id}
+        variant={selected === r.id ? 'fancy-primary' : 'fancy-secondary'}
+        size="sm"
+        onClick={() => setSelected(r.id)}
+      >
+        {r.title}
+      </Button>
+    ))}
+  </div>
+</div>
 
-      {/* Title & description */}
+      {/* Title, tag & description */}
       <div className="mb-4">
-        <h3 className="font-sketch text-xl text-glow" style={{ color: 'var(--sketch-primary)' }}>{mapState.title}</h3>
-        <p className="font-mono text-sm text-[var(--sketch-text-dim)]">{mapState.description}</p>
+        <div className="flex items-center gap-3 flex-wrap">
+          <h3 className="font-sketch text-xl text-glow" style={{ color: 'var(--sketch-primary)' }}>{mapState.title}</h3>
+          {mapState.tag && (
+            <span
+              className="font-mono text-[11px] uppercase tracking-[0.2em] px-3 py-1 rounded-full"
+              style={{
+                border: '1px solid var(--sketch-border-solid)',
+                color: 'var(--sketch-primary)',
+                background: 'rgba(0, 240, 255, 0.08)',
+              }}
+            >
+              {mapState.tag}
+            </span>
+          )}
+        </div>
+        <p className="font-mono text-sm text-(--sketch-text-dim) mt-2">{mapState.description}</p>
       </div>
 
       <div ref={containerRef} className="relative w-full">
@@ -137,8 +172,8 @@ export default function Roadmap({ initial = 'crash' }) {
           ))}
         </svg>
 
-        <div className="flex items-center justify-center gap-6 py-8">
-          {mapState.nodes.map((node, idx) => {
+        <div className="hidden lg:flex items-center justify-center gap-6 py-8">
+          {mapState.nodes.map((node) => {
             const completed = !!node.completed;
             return (
               <div
@@ -162,6 +197,42 @@ export default function Roadmap({ initial = 'crash' }) {
             );
           })}
         </div>
+
+        <div className="lg:hidden flex flex-col gap-6 py-8">
+          {compactRows.map((row, rowIndex) => {
+            const reversed = rowIndex % 2 === 1;
+            return (
+              <div
+                key={`row-${rowIndex}`}
+                className={`flex w-full gap-4 ${reversed ? 'flex-row-reverse' : 'flex-row'}`}
+              >
+                {row.map((node) => {
+                  const completed = !!node.completed;
+                  return (
+                    <div
+                      key={node.id}
+                      ref={(el) => (nodeRefs.current[node.id] = el)}
+                      onClick={() => openNode(node.id)}
+                      className={`sketch-card flex-1 min-w-0 p-3 text-center cursor-pointer transition-transform relative ${activeNode === node.id ? 'scale-[1.02]' : ''}`}
+                      style={{
+                        borderColor: completed ? 'var(--sketch-primary)' : undefined,
+                        boxShadow: completed ? '0 0 12px rgba(0,240,255,0.06)' : undefined,
+                      }}
+                    >
+                      {completed && (
+                        <span style={{ position: 'absolute', top: 8, right: 8, fontSize: 12, color: 'var(--sketch-primary)' }}>✓</span>
+                      )}
+
+                      <div className="font-mono text-[10px] opacity-80 truncate">{mapState.title}</div>
+                      <div className="font-sketch text-base mt-1 leading-tight">{node.label}</div>
+                    </div>
+                  );
+                })}
+                {row.length === 1 && <div className="flex-1" aria-hidden="true" />}
+              </div>
+            );
+          })}
+        </div>
       </div>
 
       {/* Details / controls */}
@@ -171,22 +242,40 @@ export default function Roadmap({ initial = 'crash' }) {
             const n = mapState.nodes.find((x) => x.id === activeNode);
             if (!n) return null;
             return (
-              <div>
+              <div className="flex-1 min-w-0">
                 <h4 className="font-sketch text-lg" style={{ color: 'var(--sketch-primary)' }}>{n.label}</h4>
-                <p className="font-mono text-sm mt-2 text-[var(--sketch-text-dim)]">{n.desc}</p>
+                <p className="font-mono text-sm mt-2 text-(--sketch-text-dim)">{n.desc}</p>
+
+                <div className="mt-4">
+                  {n.media?.url ? (
+                    <div className="rounded-lg overflow-hidden border border-(--sketch-border-solid) bg-black/20">
+                      {n.media.type === 'video' ? (
+                        <video
+                          className="w-full max-w-full block"
+                          controls
+                          src={n.media.url}
+                          poster={n.media.poster}
+                        />
+                      ) : (
+                        <img
+                          className="w-full max-w-full block object-cover"
+                          src={n.media.url}
+                          alt={n.media.alt || n.label}
+                        />
+                      )}
+                    </div>
+                  ) : (
+                    <div className="rounded-lg border border-dashed border-(--sketch-border-solid) min-h-[180px] flex items-center justify-center text-center px-4 bg-black/10">
+                      <p className="font-mono text-sm text-(--sketch-text-dim)">
+                        Espacio para agregar una imagen o video de este nodo.
+                      </p>
+                    </div>
+                  )}
+                </div>
               </div>
             );
           })()}
 
-          <div className="ml-4 flex flex-col gap-2">
-            <Button
-              variant="fancy-primary"
-              size="sm"
-              onClick={() => toggleComplete(activeNode)}
-            >
-              Marcar completado
-            </Button>
-          </div>
         </div>
       )}
     </div>

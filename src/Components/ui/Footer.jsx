@@ -1,5 +1,20 @@
 import React from 'react';
 import { siteData } from '../../data/siteData';
+import {
+  FaGithub,
+  FaLinkedin,
+  FaInstagram,
+  FaGamepad,
+  FaFileAlt,
+} from 'react-icons/fa';
+
+const socialIcons = {
+  GitHub: <FaGithub />,
+  LinkedIn: <FaLinkedin />,
+  Instagram: <FaInstagram />,
+  'Itch.io': <FaGamepad />,
+  CV: <FaFileAlt />,
+};
 
 export default function Footer() {
   return (
@@ -12,25 +27,38 @@ export default function Footer() {
     >
       <div className="max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6">
         {/* Créditos */}
-        <p
-          className="font-mono text-xs uppercase tracking-widest"
-          style={{ color: 'var(--sketch-text-dim)' }}
-        >
-          {siteData.footerText}
-        </p>
+        <div className="text-center md:text-left">
+          <p
+            className="font-mono text-xs uppercase tracking-widest"
+            style={{ color: 'var(--sketch-text-dim)' }}
+          >
+            {siteData.footerText}
+          </p>
+
+          <p
+            className="mt-2 font-mono text-[10px] uppercase tracking-widest"
+            style={{ color: 'var(--sketch-accent)' }}
+          >
+            De bocetos a proyectos.
+          </p>
+        </div>
 
         {/* Links Sociales */}
-        <div className="flex items-center gap-3">
+        <div className="flex flex-wrap items-center justify-center gap-3">
           {siteData.socialLinks.map((social) => (
             <a
               key={social.label}
               href={social.url}
               target="_blank"
               rel="noopener noreferrer"
-              className="sketch-btn text-[10px] py-1.5 px-3"
+              className="sketch-btn text-[10px] py-1.5 px-3 flex items-center"
               title={social.label}
             >
-              <span className="mr-1">{social.icon}</span>
+              {socialIcons[social.label] && (
+                <span className="mr-2">
+                  {socialIcons[social.label]}
+                </span>
+              )}
               {social.label}
             </a>
           ))}
@@ -39,11 +67,12 @@ export default function Footer() {
 
       {/* Línea decorativa inferior */}
       <div className="sketch-line mt-8 max-w-6xl mx-auto" />
+
       <p
         className="text-center mt-4 font-mono text-[10px] uppercase tracking-widest"
         style={{ color: 'var(--sketch-text-dim)' }}
       >
-        © {new Date().getFullYear()} — Todos los derechos reservados
+        Gracias por visitar mi portafolio.
       </p>
     </footer>
   );

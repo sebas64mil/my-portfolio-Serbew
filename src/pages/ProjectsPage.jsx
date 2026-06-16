@@ -65,7 +65,7 @@ export default function ProjectsPage() {
           {/* Roadmap / Experimentos técnicos */}
           <div id="experimentos" className="mt-12" style={{ scrollMarginTop: '96px' }}>
             <h2 className="font-sketch text-2xl text-glow" style={{ color: 'var(--sketch-primary)' }}>Experimentos técnicos</h2>
-            <p className="font-mono text-sm mt-2 text-[var(--sketch-text-dim)]">Este apartado es para recrear mecánicas, sistemas de videojuegos y aprendizaje del desarrollo de software.</p>
+            <p className="font-mono text-sm mt-2 text-(--sketch-text-dim)">Este apartado es para recrear mecánicas, sistemas de videojuegos y aprendizaje del desarrollo de software.</p>
 
             <div className="mt-4">
               <div className="relative sketch-card overflow-hidden p-6" style={{ minHeight: '260px' }}>

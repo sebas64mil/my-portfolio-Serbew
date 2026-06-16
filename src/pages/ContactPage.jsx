@@ -60,7 +60,7 @@ export default function ContactPage() {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 items-center">
               <div>
                 <h3 className="font-sketch text-xl" style={{ color: 'var(--sketch-primary)' }}>{offer === 'games' ? 'Desarrollo de Juegos' : offer === 'web' ? 'Desarrollo Web' : 'Servicios Extras'}</h3>
-                <p className="font-mono mt-3 text-[var(--sketch-text-dim)]">
+                <p className="font-mono mt-3 text-(--sketch-text-dim)">
                   {offer === 'games' ? 'Desarrollo de prototipos, mecánicas y gameplay.' : offer === 'web' ? 'Sitios responsivos, SPAs y aplicaciones.' : 'Sistemas, herramientas y efectos visuales.'}
                 </p>
                 <div className="mt-4">
@@ -69,7 +69,7 @@ export default function ContactPage() {
               </div>
 
               <div className="flex items-center justify-center">
-                <div className="w-full h-40 border border-dashed rounded-md flex items-center justify-center text-center text-sm font-mono text-[var(--sketch-text-dim)]">
+                <div className="w-full h-40 border border-dashed rounded-md flex items-center justify-center text-center text-sm font-mono text-(--sketch-text-dim)">
                   Espacio para imagen (sube en src/assets y reemplaza)
                 </div>
               </div>
@@ -94,7 +94,7 @@ export default function ContactPage() {
                   </div>
                   <div className="flex-1">
                     <div className="font-sketch text-base" style={{ color: 'var(--sketch-primary)' }}>{s.title}</div>
-                    <div className="font-mono text-sm text-[var(--sketch-text-dim)]">{s.desc}</div>
+                    <div className="font-mono text-sm text-(--sketch-text-dim)">{s.desc}</div>
                   </div>
                   <Button variant="fancy-primary" size="sm" onClick={() => { /* placeholder */ }}>Abrir</Button>
                 </div>

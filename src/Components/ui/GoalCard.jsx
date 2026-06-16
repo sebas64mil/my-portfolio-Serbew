@@ -7,7 +7,7 @@ export default function GoalCard({ title, desc, priority }) {
       <div className="flex items-center justify-between">
         <div>
           <div className="font-sketch text-lg" style={{ color: 'var(--sketch-primary)' }}>{title}</div>
-          <div className="font-mono text-sm mt-2 text-[var(--sketch-text-dim)]">{desc}</div>
+          <div className="font-mono text-sm mt-2 text-(--sketch-text-dim)">{desc}</div>
         </div>
         <div className={`px-3 py-1 rounded-full font-mono text-xs ${color}`} style={{ color: 'white' }}>{priority}</div>
       </div>

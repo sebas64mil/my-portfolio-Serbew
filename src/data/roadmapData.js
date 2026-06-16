@@ -2,6 +2,7 @@ export const roadmaps = [
   {
     id: 'crash',
     title: 'Crash Bandicoot',
+    tag: 'Mecánicas',
     description: 'Mecánicas estilo Crash (plataformas, giro/ataque, saltos).',
     nodes: [
       { id: 'move', label: 'Movimiento base', desc: 'Caminar, correr y control de dirección.' },
@@ -13,6 +14,7 @@ export const roadmaps = [
   {
     id: 'platform',
     title: 'Plataformas - General',
+    tag: 'Sistemas',
     description: 'Mecánicas comunes de juegos de plataformas.',
     nodes: [
       { id: 'p-move', label: 'Movimiento base', desc: 'Desplazamiento y control de personaje.', completed: true },

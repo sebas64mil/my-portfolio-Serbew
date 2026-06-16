@@ -20,37 +20,65 @@ export default function CardCarousel({ items = [], className = '' }) {
     <div
       className={`carousel-container w-full flex flex-col items-center ${className}`}
     >
-      <div className="w-full max-w-6xl flex items-center justify-center gap-6">
-
-        {/* Left Control */}
-        <div className="shrink-0">
-          <Button
-            variant="fancy-secondary"
-            size="sm"
-            onClick={() => go(-1)}
-            aria-label="Prev"
-          >
-            ◀
-          </Button>
-        </div>
-
-        {/* Cards */}
-        <div className="flex items-center justify-center gap-6 flex-1">
-
-          {/* Previous */}
-          <div className="w-64 md:w-72 opacity-80 scale-95 transition-all duration-300">
-            <Card
-              category={items[prev].category}
-              title={items[prev].title}
-              summary={items[prev].summary}
-            />
+      <div className="w-full max-w-6xl flex flex-col items-center gap-4">
+        {/* Desktop layout */}
+        <div className="hidden md:flex w-full items-center justify-center gap-6">
+          <div className="shrink-0">
+            <Button
+              variant="fancy-secondary"
+              size="sm"
+              onClick={() => go(-1)}
+              aria-label="Prev"
+            >
+              ◀
+            </Button>
           </div>
 
-          {/* Current */}
-          <div
-            className="w-80 md:w-96 transition-all duration-300"
-            style={{ zIndex: 20 }}
-          >
+          <div className="flex items-center justify-center gap-6 flex-1">
+            <div className="w-64 lg:w-72 opacity-80 scale-95 transition-all duration-300">
+              <Card
+                category={items[prev].category}
+                title={items[prev].title}
+                summary={items[prev].summary}
+              />
+            </div>
+
+            <div
+              className="w-80 lg:w-96 transition-all duration-300"
+              style={{ zIndex: 20 }}
+            >
+              <Card
+                category={items[index].category}
+                title={items[index].title}
+                summary={items[index].summary}
+                featured
+              />
+            </div>
+
+            <div className="w-64 lg:w-72 opacity-80 scale-95 transition-all duration-300">
+              <Card
+                category={items[next].category}
+                title={items[next].title}
+                summary={items[next].summary}
+              />
+            </div>
+          </div>
+
+          <div className="shrink-0">
+            <Button
+              variant="fancy-secondary"
+              size="sm"
+              onClick={() => go(1)}
+              aria-label="Next"
+            >
+              ▶
+            </Button>
+          </div>
+        </div>
+
+        {/* Mobile layout */}
+        <div className="md:hidden w-full flex flex-col items-center gap-4">
+          <div className="w-full max-w-[19rem] sm:max-w-[20rem] transition-all duration-300">
             <Card
               category={items[index].category}
               title={items[index].title}
@@ -59,27 +87,24 @@ export default function CardCarousel({ items = [], className = '' }) {
             />
           </div>
 
-          {/* Next */}
-          <div className="w-64 md:w-72 opacity-80 scale-95 transition-all duration-300">
-            <Card
-              category={items[next].category}
-              title={items[next].title}
-              summary={items[next].summary}
-            />
+          <div className="flex items-center gap-3">
+            <Button
+              variant="fancy-secondary"
+              size="sm"
+              onClick={() => go(-1)}
+              aria-label="Prev"
+            >
+              ◀
+            </Button>
+            <Button
+              variant="fancy-secondary"
+              size="sm"
+              onClick={() => go(1)}
+              aria-label="Next"
+            >
+              ▶
+            </Button>
           </div>
-
-        </div>
-
-        {/* Right Control */}
-        <div className="shrink-0">
-          <Button
-            variant="fancy-secondary"
-            size="sm"
-            onClick={() => go(1)}
-            aria-label="Next"
-          >
-            ▶
-          </Button>
         </div>
 
       </div>

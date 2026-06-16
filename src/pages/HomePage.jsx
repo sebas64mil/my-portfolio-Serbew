@@ -24,8 +24,6 @@ export default function HomePage() {
   // visibility and stats animation state
   const [visible, setVisible] = useState({});
   const [statsCounts, setStatsCounts] = useState({ years: 0, projects: 0, jams: 0 });
-
-  // current section for right-side indicator
   const [currentSection, setCurrentSection] = useState('Inicio');
 
   const localLinks = [
@@ -94,9 +92,9 @@ export default function HomePage() {
     requestAnimationFrame(step);
   }, [visible.stats]);
 
-  // Scroll spy to update current section indicator
+  // Scroll spy to update the vertical menu and active section state
   useEffect(() => {
-    const ids = ['hero','about','skills','featured','stats','goals','education'];
+    const ids = ['hero', 'about', 'skills', 'featured', 'stats', 'goals', 'education'];
     const io = new IntersectionObserver((entries) => {
       entries.forEach((e) => {
         if (e.isIntersecting) setCurrentSection(e.target.id || '');
@@ -107,6 +105,7 @@ export default function HomePage() {
       const el = document.getElementById(id);
       if (el) io.observe(el);
     });
+
     return () => io.disconnect();
   }, []);
 
@@ -114,7 +113,7 @@ export default function HomePage() {
     <div className="relative w-full min-h-screen" style={{ background: 'var(--sketch-bg)' }}>
       <Navbar localLinks={localLinks} />
 
-      {/* Right-side vertical section nav (not inside navbar) */}
+      {/* Right-side vertical section nav */}
       <div className="hidden lg:flex flex-col items-end gap-3 fixed right-3 top-1/2 transform -translate-y-1/2 z-50">
         {localLinks.map((link) => {
           const id = (link.href || '').replace('#', '');
@@ -127,10 +126,10 @@ export default function HomePage() {
                 if (el) el.scrollIntoView({ behavior: 'smooth' });
                 window.history.pushState(null, '', link.href);
               }}
-              className={`text-right font-mono text-sm px-2 transition-colors ${active ? 'text-[var(--sketch-primary)]' : 'text-[var(--sketch-text-dim)] hover:text-[var(--sketch-primary)]'}`}
+              className={`text-right font-mono text-sm px-2 transition-colors ${active ? 'text-(--sketch-primary)' : 'text-(--sketch-text-dim) hover:text-(--sketch-primary)'}`}
             >
               <span className="block">{link.label}</span>
-              <span className={`block h-[2px] bg-[var(--sketch-primary)] mt-1 transition-all ${active ? 'w-full' : 'w-0'}`} />
+              <span className={`block h-0.5 bg-(--sketch-primary) mt-1 transition-all ${active ? 'w-full' : 'w-0'}`} />
             </button>
           );
         })}
@@ -163,21 +162,6 @@ export default function HomePage() {
             <span className="absolute bottom-2 left-3 font-mono text-xs select-none" style={{ color: 'var(--sketch-border-solid)' }}>+</span>
             <span className="absolute bottom-2 right-3 font-mono text-xs select-none" style={{ color: 'var(--sketch-border-solid)' }}>+</span>
 
-            {/* Badge */}
-            <div
-              className="border-sketch-subtle px-4 py-1.5 mb-6"
-              style={{
-                borderRadius: '9999px',
-                background: 'rgba(0, 240, 255, 0.05)',
-              }}
-            >
-              <span
-                className="font-mono text-[10px] uppercase tracking-[0.2em]"
-                style={{ color: 'var(--sketch-primary)' }}
-              >
-                Portafolio 2026
-              </span>
-            </div>
 
             {/* Slogan */}
             <h1
@@ -196,7 +180,7 @@ export default function HomePage() {
             </p>
 
             {/* Social buttons */}
-            <div className="mt-6 flex items-center gap-3">
+            <div className="mt-6 flex flex-wrap items-center justify-center gap-3">
               <Button variant="fancy-primary" size="sm" onClick={() => {}} aria-label="GitHub">
                 <>
                   <FaGithub /> <span className="ml-2">GitHub</span>
@@ -335,14 +319,14 @@ export default function HomePage() {
 
           <div className="sketch-card p-6 mb-6" style={{ backdropFilter: 'blur(6px)' }}>
             <h3 className="font-sketch text-2xl" style={{ color: 'var(--sketch-primary)' }}>Featured Project</h3>
-            <p className="font-mono text-sm mt-3 text-[var(--sketch-text-dim)]">A showcase of one of my most representative projects, highlighting both technical implementation and game design decisions.</p>
+            <p className="font-mono text-sm mt-3 text-(--sketch-text-dim)">A showcase of one of my most representative projects, highlighting both technical implementation and game design decisions.</p>
             <div className="mt-4">
               <Button variant="fancy-primary" size="md" onClick={() => { window.location.href = '/projects#projects'; }}>View Projects</Button>
             </div>
 
             <div className="mt-6 w-full bg-black rounded-md overflow-hidden" style={{ minHeight: '320px' }}>
               {/* Video/embed placeholder */}
-              <div className="w-full h-full flex items-center justify-center text-[12px] font-mono text-[var(--sketch-text-dim)]">Video showcase placeholder — replace with &lt;iframe&gt; or &lt;video&gt;</div>
+              <div className="w-full h-full flex items-center justify-center text-[12px] font-mono text-(--sketch-text-dim)">Video showcase placeholder — replace with &lt;iframe&gt; or &lt;video&gt;</div>
             </div>
           </div>
         </div>

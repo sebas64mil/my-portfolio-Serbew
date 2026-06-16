@@ -70,10 +70,13 @@ export const siteData = {
   },
 
   // --- Footer ---
-  footerText: 'Diseñado y desarrollado por Serbew',
+  footerText: 'Serbew',
+  footerTagline: 'Proyectos y bocetos',
   socialLinks: [
-    { label: 'GitHub', url: 'https://github.com/sebas64mil', icon: '⟨/⟩' },
-    { label: 'LinkedIn', url: '#', icon: 'in' },
-    { label: 'Itch.io', url: '#', icon: '🎮' },
+    { label: 'GitHub', url: 'https://github.com/sebas64mil' },
+    { label: 'LinkedIn', url: '#' },
+    { label: 'Instagram', url: '#' },
+    { label: 'Itch.io', url: '#' },
+    { label: 'CV', url: '#' },
   ],
 };
