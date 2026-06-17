@@ -5,14 +5,16 @@ import ParticlesBackground from '../Components/graphics/ParticlesBackground';
 import Button from '../Components/ui/Button';
 import Footer from '../Components/ui/Footer';
 import { FaGithub, FaLinkedin, FaInstagram, FaGamepad, FaFileAlt } from 'react-icons/fa';
+import { siteData } from '../data/siteData';
 
-const SOCIALS = [
-  { id: 'itchio', Icon: FaGamepad, title: 'Itch.io', desc: 'Juegos y demos' },
-  { id: 'instagram', Icon: FaInstagram, title: 'Instagram', desc: 'Imágenes y proceso' },
-  { id: 'linkedin', Icon: FaLinkedin, title: 'LinkedIn', desc: 'Perfil profesional' },
-  { id: 'github', Icon: FaGithub, title: 'GitHub', desc: 'Repositorios y código' },
-  { id: 'cv', Icon: FaFileAlt, title: 'CV', desc: 'Hoja de vida (PDF)' }
-];
+
+const socialIcons = {
+  GitHub: FaGithub,
+  LinkedIn: FaLinkedin,
+  Instagram: FaInstagram,
+  'Itch.io': FaGamepad,
+  CV: FaFileAlt,
+};
 
 export default function ContactPage() {
   const [offer, setOffer] = useState('games'); // 'games' | 'web' | 'extras'
@@ -61,7 +63,7 @@ export default function ContactPage() {
               <div>
                 <h3 className="font-sketch text-xl" style={{ color: 'var(--sketch-primary)' }}>{offer === 'games' ? 'Desarrollo de Juegos' : offer === 'web' ? 'Desarrollo Web' : 'Servicios Extras'}</h3>
                 <p className="font-mono mt-3 text-(--sketch-text-dim)">
-                  {offer === 'games' ? 'Desarrollo de prototipos, mecánicas y gameplay.' : offer === 'web' ? 'Sitios responsivos, SPAs y aplicaciones.' : 'Sistemas, herramientas y efectos visuales.'}
+                  {offer === 'games' ? 'Desarrollo de prototipos, sistemas de juego y experiencias interactivas utilizando motores modernos y herramientas especializadas. ' : offer === 'web' ? 'Diseño y desarrollo de sitios web modernos, interactivos y responsivos.' : 'Herramientas de desarrollo, efectos visuales y soluciones personalizadas para proyectos creativos.'}
                 </p>
                 <div className="mt-4">
                   <Button variant="fancy-primary" size="sm" onClick={() => { /* placeholder */ }}>Contactar</Button>
@@ -87,18 +89,49 @@ export default function ContactPage() {
             <ParticlesBackground color="#00f0ff" count={300} blur={3} />
 
             <div className="relative z-10 grid grid-cols-1 md:grid-cols-2 gap-4">
-              {SOCIALS.map((s) => (
-                <div key={s.id} className="flex items-center gap-4 p-4 border border-dashed" style={{ background: 'rgba(0,0,0,0.45)' }}>
-                  <div className="text-2xl" style={{ color: '#00f0ff' }}>
-                    <s.Icon />
-                  </div>
-                  <div className="flex-1">
-                    <div className="font-sketch text-base" style={{ color: 'var(--sketch-primary)' }}>{s.title}</div>
-                    <div className="font-mono text-sm text-(--sketch-text-dim)">{s.desc}</div>
-                  </div>
-                  <Button variant="fancy-primary" size="sm" onClick={() => { /* placeholder */ }}>Abrir</Button>
-                </div>
-              ))}
+{siteData.socialLinks.map((social) => {
+  const Icon = socialIcons[social.label];
+
+  return (
+    <div
+      key={social.label}
+      className="flex items-center gap-4 p-4 border border-dashed"
+      style={{ background: 'rgba(0,0,0,0.45)' }}
+    >
+      <div
+        className="text-2xl"
+        style={{ color: 'var(--sketch-primary)' }}
+      >
+        {Icon && <Icon />}
+      </div>
+
+      <div className="flex-1">
+        <div
+          className="font-sketch text-base"
+          style={{ color: 'var(--sketch-primary)' }}
+        >
+          {social.label}
+        </div>
+
+        <div className="font-mono text-sm text-(--sketch-text-dim)">
+          {social.label === 'GitHub' && 'Repositorios y código'}
+          {social.label === 'LinkedIn' && 'Perfil profesional'}
+          {social.label === 'Instagram' && 'Videos, publicaciones y procesos'}
+          {social.label === 'Itch.io' && 'proyectos, demos y juegos completos'}
+          {social.label === 'CV' && 'Hoja de vida (PDF)'}
+        </div>
+      </div>
+
+      <Button
+        variant="fancy-primary"
+        size="sm"
+        onClick={() => window.open(social.url, '_blank')}
+      >
+        Abrir
+      </Button>
+    </div>
+  );
+})}
             </div>
           </div>
 

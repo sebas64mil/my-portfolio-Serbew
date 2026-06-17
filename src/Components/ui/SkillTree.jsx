@@ -117,24 +117,26 @@ export default function SkillTree() {
 
         {/* Skill Nodes */}
         <div className="flex flex-wrap justify-center gap-4 relative z-10">
-          {tree.skills.map((skill, i) => (
-            <div
-              key={`${activeTab}-${skill.name}`}
-              ref={(el) => (nodeRefs.current[i] = el)}
-              className="sketch-card px-4 py-3 flex items-center gap-2 transition-all duration-300 hover:scale-105 cursor-default"
-              style={{
-                animationDelay: `${i * 80}ms`,
-              }}
-            >
-              <span className="text-lg">{skill.icon}</span>
-              <span
-                className="font-mono text-xs uppercase tracking-wider"
-                style={{ color: 'var(--sketch-text)' }}
-              >
-                {skill.name}
-              </span>
-            </div>
-          ))}
+{tree.skills.map((skill, i) => {
+  const Icon = skill.icon;
+
+  return (
+    <div
+      key={`${activeTab}-${skill.name}`}
+      ref={(el) => (nodeRefs.current[i] = el)}
+      className="sketch-card px-4 py-3 flex items-center gap-2 transition-all duration-300 hover:scale-105 cursor-default"
+    >
+      <Icon className="text-lg" />
+
+      <span
+        className="font-mono text-xs uppercase tracking-wider"
+        style={{ color: 'var(--sketch-text)' }}
+      >
+        {skill.name}
+      </span>
+    </div>
+  );
+})}
         </div>
       </div>
     </div>

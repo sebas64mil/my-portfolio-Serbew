@@ -72,7 +72,7 @@ export default function ProjectsPage() {
                 <ParticlesBackground color="#00f0ff" count={300} blur={3} />
 
                 <div className="relative z-10">
-                  <Roadmap initial={tab === 'games' ? 'crash' : 'crash'} />
+                  <Roadmap initial={tab === 'games' ? 'Inventory' : 'Inventory'} />
                 </div>
               </div>
               {/* Separator below roadmap */}

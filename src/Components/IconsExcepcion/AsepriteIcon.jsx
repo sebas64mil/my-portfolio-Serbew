@@ -1,0 +1,14 @@
+export default function AsepriteIcon({ className }) {
+  return (
+   <svg
+   className={className}
+    width="1em"
+    height="1em"
+   role="img"
+   viewBox="0 0 78 78"
+   xmlns="http://www.w3.org/2000/svg"
+    >
+  <path d="M10.3903 0V5.2H62.3512V0H10.3903ZM62.3512 5.2V10.4H67.5512V5.2H62.3512ZM67.5512 10.4V57.2H62.3512V62.4H10.3903V57.2H5.19025V10.4H0V67.6H5.19675V72.8H10.3935V78H62.3545V72.8H67.5545V67.6H72.748V10.4H67.5512ZM5.1935 10.4H10.3903V5.2H5.19025L5.1935 10.4ZM20.7805 20.8V41.6H25.9805V20.8H20.7805ZM46.7643 20.8V41.6H51.961V20.8H46.7643Z" fill="#fff"/>
+    </svg>
+  );
+}

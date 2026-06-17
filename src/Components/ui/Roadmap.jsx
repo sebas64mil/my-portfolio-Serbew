@@ -3,7 +3,7 @@ import { roadmaps } from '../../data/roadmapData';
 import Button from './Button';
 
 // Roadmap with animated connecting lines and completion state per node
-export default function Roadmap({ initial = 'crash' }) {
+export default function Roadmap({ initial = 'Inventory' }) {
   const [selected, setSelected] = useState(initial);
   const [mapState, setMapState] = useState(() => {
     const m = roadmaps.find((r) => r.id === initial) || roadmaps[0];

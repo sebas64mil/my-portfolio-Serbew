@@ -16,6 +16,14 @@ const GRID_COLORS = [
   { name: 'Cian', value: '#00f0ff' }
 ];
 
+const socialIcons = {
+  GitHub: FaGithub,
+  LinkedIn: FaLinkedin,
+  Instagram: FaInstagram,
+  'Itch.io': FaGamepad,
+  CV: FaFileAlt,
+};
+
 export default function HomePage() {
   const sceneRef = useRef(null);
   const location = useLocation();
@@ -75,7 +83,7 @@ export default function HomePage() {
   // Animate stats when stats section becomes visible
   useEffect(() => {
     if (!visible.stats) return;
-    const targets = { years: 3, projects: 12, jams: 5 };
+    const targets = { years: 2, projects: 4, jams: 6 };
     const duration = 900; // ms
     const start = performance.now();
 
@@ -180,37 +188,26 @@ export default function HomePage() {
             </p>
 
             {/* Social buttons */}
-            <div className="mt-6 flex flex-wrap items-center justify-center gap-3">
-              <Button variant="fancy-primary" size="sm" onClick={() => {}} aria-label="GitHub">
-                <>
-                  <FaGithub /> <span className="ml-2">GitHub</span>
-                </>
-              </Button>
+<div className="mt-6 flex flex-wrap items-center justify-center gap-3">
+  {siteData.socialLinks.map((social) => {
+    const Icon = socialIcons[social.label];
 
-              <Button variant="fancy-primary" size="sm" onClick={() => {}} aria-label="LinkedIn">
-                <>
-                  <FaLinkedin /> <span className="ml-2">LinkedIn</span>
-                </>
-              </Button>
-
-              <Button variant="fancy-primary" size="sm" onClick={() => {}} aria-label="Instagram">
-                <>
-                  <FaInstagram /> <span className="ml-2">Instagram</span>
-                </>
-              </Button>
-
-              <Button variant="fancy-primary" size="sm" onClick={() => {}} aria-label="Itch.io">
-                <>
-                  <FaGamepad /> <span className="ml-2">Itch.io</span>
-                </>
-              </Button>
-
-              <Button variant="fancy-primary" size="sm" onClick={() => {}} aria-label="CV">
-                <>
-                  <FaFileAlt /> <span className="ml-2">CV</span>
-                </>
-              </Button>
-            </div>
+    return (
+      <Button
+        key={social.label}
+        variant="fancy-primary"
+        size="sm"
+        onClick={() => window.open(social.url, '_blank')}
+        aria-label={social.label}
+      >
+        <>
+          {Icon && <Icon />}
+          <span className="ml-2">{social.label}</span>
+        </>
+      </Button>
+    );
+  })}
+</div>
           </div>
 
           {/* Flecha indicadora */}
@@ -286,7 +283,7 @@ export default function HomePage() {
       </section>
 
       {/* ========== SKILLS ========== */}
-      <section id="skills" className="relative py-24 px-6 overflow-hidden">
+      <section id="skills" className="relative py-6 px-6 overflow-hidden">
         {/* Fondo de cuadrícula técnica con coordenadas */}
         <GridBackground color={gridColor} />
 
@@ -308,7 +305,7 @@ export default function HomePage() {
       </section>
 
       {/* ========== FEATURED / CTA ========== */}
-      <section id="featured" className="home-animate relative py-24 px-6 overflow-hidden" style={{ scrollMarginTop: '96px' }}>
+      <section id="featured" className="home-animate relative py-6 px-6 overflow-hidden" style={{ scrollMarginTop: '96px' }}>
         <GridBackground color={gridColor} />
         <div className="max-w-6xl mx-auto relative z-10">
           <div className="flex items-center gap-4 mb-6">
@@ -319,7 +316,7 @@ export default function HomePage() {
 
           <div className="sketch-card p-6 mb-6" style={{ backdropFilter: 'blur(6px)' }}>
             <h3 className="font-sketch text-2xl" style={{ color: 'var(--sketch-primary)' }}>Featured Project</h3>
-            <p className="font-mono text-sm mt-3 text-(--sketch-text-dim)">A showcase of one of my most representative projects, highlighting both technical implementation and game design decisions.</p>
+            <p className="font-mono text-sm mt-3 text-(--sketch-text-dim)">Cada proyecto representa una oportunidad para aprender, experimentar y transformar ideas en experiencias interactivas. Desde sistemas de videojuegos y herramientas de desarrollo hasta aplicaciones web y efectos visuales, aquí encontrarás una muestra de mi crecimiento, creatividad y pasión por construir soluciones digitales.</p>
             <div className="mt-4">
               <Button variant="fancy-primary" size="md" onClick={() => { window.location.href = '/projects#projects'; }}>View Projects</Button>
             </div>
@@ -362,11 +359,27 @@ export default function HomePage() {
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             {[
-              { title: 'Reach B2 English Level', desc: 'Improve fluency and technical communication.', priority: 'High' },
-              { title: 'Publish Second Complete Game', desc: 'Ship a full game on itch.io with analytics.', priority: 'High' },
-              { title: 'Improve Three.js Skills', desc: 'Learn advanced rendering and optimization.', priority: 'Medium' },
-              { title: 'Learn Advanced Game Architecture', desc: 'Study ECS, decoupled systems and tools.', priority: 'Low' },
-            ].map((g, i) => (
+  {
+    title: 'Alcanzar el nivel B2 de inglés',
+    desc: 'Mejorar la fluidez, la comprensión y la comunicación técnica en inglés.',
+    priority: 'Alta'
+  },
+  {
+    title: 'Completar un roadmap de desarrollo',
+    desc: 'Finalizar uno de los roadmaps de mecánicas, sistemas o proyectos para fortalecer mis habilidades prácticas.',
+    priority: 'Alta'
+  },
+  {
+    title: 'Comenzar mi camino en Unreal Engine',
+    desc: 'Explorar las bases del motor, su flujo de trabajo y las herramientas fundamentales para futuros proyectos.',
+    priority: 'Media'
+  },
+  {
+    title: 'Crear contenido para redes sociales',
+    desc: 'Compartir proyectos, avances, aprendizajes y experimentos para documentar mi crecimiento como desarrollador.',
+    priority: 'Baja'
+  }
+].map((g, i) => (
               <GoalCard key={i} title={g.title} desc={g.desc} priority={g.priority} />
             ))}
           </div>
@@ -385,9 +398,7 @@ export default function HomePage() {
 
           <div className="space-y-4">
             {[
-              { institution: 'Universidad de Ejemplo', program: 'Licenciatura en Informática', date: '2018 - 2022', desc: 'Estudios formales en ciencias de la computación.' },
-              { institution: 'Curso Three.js Avanzado', program: 'Curso Online', date: '2024', desc: 'Renderizado avanzado y optimización.' },
-              { institution: 'Game Jam XYZ', program: 'Participación', date: '2023', desc: 'Prototipado rápido y teamwork.' },
+              { institution: 'Universidad de San Buenaventura', program: 'Ingenieria Multimedia', date: '2022 - 2026', desc: 'Estudios en diseño y desarrollo de contenido multimedia interactivo.' },
             ].map((e, i) => (
               <EducationItem key={i} institution={e.institution} program={e.program} date={e.date} desc={e.desc} />
             ))}

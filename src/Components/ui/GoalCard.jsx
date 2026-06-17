@@ -1,7 +1,7 @@
 import React from 'react';
 
 export default function GoalCard({ title, desc, priority }) {
-  const color = priority === 'High' ? 'bg-red-600' : priority === 'Medium' ? 'bg-yellow-600' : 'bg-gray-600';
+  const color = priority === 'Alta' ? 'bg-red-600' : priority === 'Media' ? 'bg-yellow-600' : 'bg-gray-600';
   return (
     <div className="sketch-card p-4">
       <div className="flex items-center justify-between">
