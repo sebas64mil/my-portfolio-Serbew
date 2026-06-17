@@ -38,7 +38,7 @@ export default function HomePage() {
     { href: '#hero', label: 'Inicio' },
     { href: '#about', label: 'Sobre mí' },
     { href: '#skills', label: 'Herramientas' },
-    { href: '#featured', label: 'Featured' },
+    { href: '#Proyectos', label: 'Proyectos' },
     { href: '#stats', label: 'Estadísticas' },
     { href: '#goals', label: 'Metas' },
     { href: '#education', label: 'Educación' },
@@ -305,20 +305,20 @@ export default function HomePage() {
       </section>
 
       {/* ========== FEATURED / CTA ========== */}
-      <section id="featured" className="home-animate relative py-6 px-6 overflow-hidden" style={{ scrollMarginTop: '96px' }}>
+      <section id="Proyectos" className="home-animate relative py-6 px-6 overflow-hidden" style={{ scrollMarginTop: '96px' }}>
         <GridBackground color={gridColor} />
         <div className="max-w-6xl mx-auto relative z-10">
           <div className="flex items-center gap-4 mb-6">
             <div className="sketch-line flex-1" />
-            <h2 className="font-sketch text-3xl tracking-wider text-glow" style={{ color: 'var(--sketch-primary)' }}>Featured Project</h2>
+            <h2 className="font-sketch text-3xl tracking-wider text-glow" style={{ color: 'var(--sketch-primary)' }}>Proyectos y Experimentos</h2>
             <div className="sketch-line flex-1" />
           </div>
 
           <div className="sketch-card p-6 mb-6" style={{ backdropFilter: 'blur(6px)' }}>
-            <h3 className="font-sketch text-2xl" style={{ color: 'var(--sketch-primary)' }}>Featured Project</h3>
+            <h3 className="font-sketch text-2xl" style={{ color: 'var(--sketch-primary)' }}>Proyectos y Experiencias</h3>
             <p className="font-mono text-sm mt-3 text-(--sketch-text-dim)">Cada proyecto representa una oportunidad para aprender, experimentar y transformar ideas en experiencias interactivas. Desde sistemas de videojuegos y herramientas de desarrollo hasta aplicaciones web y efectos visuales, aquí encontrarás una muestra de mi crecimiento, creatividad y pasión por construir soluciones digitales.</p>
             <div className="mt-4">
-              <Button variant="fancy-primary" size="md" onClick={() => { window.location.href = '/projects#projects'; }}>View Projects</Button>
+              <Button variant="fancy-primary" size="md" onClick={() => { window.location.href = '/projects#projects'; }}>Explorar proyectos</Button>
             </div>
 
             <div className="mt-6 w-full bg-black rounded-md overflow-hidden" style={{ minHeight: '320px' }}>
