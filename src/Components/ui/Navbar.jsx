@@ -94,7 +94,9 @@ export default function Navbar({ localLinks, pageLinks, basePath }) {
               );
             })}
 
-            <div className="w-px h-5 mx-2" style={{ background: 'var(--sketch-border-solid)' }} />
+            {local.length > 0 && (
+              <div className="w-px h-5 mx-2" style={{ background: 'var(--sketch-border-solid)' }} />
+            )}
 
             {pages.map((link) => {
               const isActive = location.pathname === link.path;
@@ -185,7 +187,9 @@ export default function Navbar({ localLinks, pageLinks, basePath }) {
                 );
               })}
 
-              <div className="my-1 h-px w-full" style={{ background: 'var(--sketch-border-solid)' }} />
+              {local.length > 0 && (
+                <div className="my-1 h-px w-full" style={{ background: 'var(--sketch-border-solid)' }} />
+              )}
 
               {pages.map((link) => {
                 const isActive = location.pathname === link.path;

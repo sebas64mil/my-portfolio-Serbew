@@ -4,12 +4,12 @@ export default function Card({ imageSrc, category, title, summary, className = '
   return (
     <div className={`sketch-card overflow-hidden text-left ${className}`}>
       {/* Image area: covers full top width, no outer margin */}
-      <div className="w-full h-60 bg-gray-200/60 flex-shrink-0">
+      <div className="w-full h-60 bg-gray-900/60 flex-shrink-0">
         {imageSrc ? (
           <img src={imageSrc} alt={title} className="w-full h-full object-cover" />
         ) : (
           // Placeholder empty block that occupies space for future image
-          <div className="w-full h-full bg-gray-200" />
+          <div className="w-full h-full bg-gray-900" />
         )}
       </div>
 

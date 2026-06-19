@@ -11,7 +11,7 @@ import Footer from '../Components/ui/Footer';
 
 
 export default function ProjectsPage() {
-  const [tab, setTab] = useState('web');
+  const [tab, setTab] = useState('games');
   const items = tab === 'web' ? webProjects : gameProjects;
 
   const localLinks = [
@@ -44,7 +44,7 @@ export default function ProjectsPage() {
 
           {/* Category buttons under title */}
           <div className="flex gap-3 mt-4 mb-6">
-            <Button variant={tab === 'web' ? 'fancy-primary' : 'fancy-secondary'} size="sm" onClick={() => setTab('web')}>Web</Button>
+            <Button variant={tab === 'web' ? 'fancy-primary' : 'fancy-secondary'} size="sm" onClick={() => setTab('web')} disabled>Web</Button>
             <Button variant={tab === 'games' ? 'fancy-primary' : 'fancy-secondary'} size="sm" onClick={() => setTab('games')}>Videojuegos</Button>
           </div>
 

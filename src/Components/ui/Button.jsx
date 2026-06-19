@@ -21,9 +21,10 @@ export default function Button({
   variant = 'fancy-primary',
   size = 'md',
   className = '',
+  disabled = false,
   ...props
 }) {
-  const baseClass = `btn-${variant} btn-${size} ${className}`;
+  const baseClass = `btn-${variant} btn-${size} ${disabled ? 'disabled opacity-40 cursor-not-allowed pointer-events-none' : ''} ${className}`;
 
   const content = (
     <>
@@ -34,10 +35,20 @@ export default function Button({
     </>
   );
 
+  const handleClick = (e) => {
+    if (disabled) {
+      e.preventDefault();
+      return;
+    }
+    if (onClick) {
+      onClick(e);
+    }
+  };
+
   // Si tiene la propiedad 'to', se renderiza con React Router Link
   if (to) {
     return (
-      <Link to={to} onClick={onClick} className={baseClass} {...props}>
+      <Link to={to} onClick={handleClick} className={baseClass} {...props}>
         {content}
       </Link>
     );
@@ -46,7 +57,7 @@ export default function Button({
   // Si tiene la propiedad 'href', se renderiza como enlace HTML clásico (útil para anclas locales como #about)
   if (href) {
     return (
-      <a href={href} onClick={onClick} className={baseClass} {...props}>
+      <a href={href} onClick={handleClick} className={baseClass} {...props}>
         {content}
       </a>
     );
@@ -54,7 +65,7 @@ export default function Button({
 
   // Por defecto se renderiza como elemento <button>
   return (
-    <button onClick={onClick} className={baseClass} {...props}>
+    <button onClick={handleClick} className={baseClass} disabled={disabled} {...props}>
       {content}
     </button>
   );

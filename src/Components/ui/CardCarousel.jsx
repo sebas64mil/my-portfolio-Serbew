@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import Button from './Button';
 import Card from './Card';
 
@@ -35,28 +36,41 @@ export default function CardCarousel({ items = [], className = '' }) {
           </div>
 
           <div className="flex items-center justify-center gap-6 flex-1">
-            <div className="w-64 lg:w-72 opacity-80 scale-95 transition-all duration-300">
+            {/* Left Card: clickable to shift carousel */}
+            <div 
+              className="w-64 lg:w-72 opacity-60 scale-95 transition-all duration-300 cursor-pointer hover:opacity-90 hover:scale-[0.97]"
+              onClick={() => setIndex(prev)}
+            >
               <Card
+                imageSrc={items[prev].coverImage}
                 category={items[prev].category}
                 title={items[prev].title}
                 summary={items[prev].summary}
               />
             </div>
 
-            <div
-              className="w-80 lg:w-96 transition-all duration-300"
+            {/* Active Card: clickable to enter project page */}
+            <Link 
+              to={`/projects/${items[index].id}`} 
+              className="w-80 lg:w-96 transition-all duration-300 block hover:scale-[1.03] active:scale-[1.01]"
               style={{ zIndex: 20 }}
             >
               <Card
+                imageSrc={items[index].coverImage}
                 category={items[index].category}
                 title={items[index].title}
                 summary={items[index].summary}
                 featured
               />
-            </div>
+            </Link>
 
-            <div className="w-64 lg:w-72 opacity-80 scale-95 transition-all duration-300">
+            {/* Right Card: clickable to shift carousel */}
+            <div 
+              className="w-64 lg:w-72 opacity-60 scale-95 transition-all duration-300 cursor-pointer hover:opacity-90 hover:scale-[0.97]"
+              onClick={() => setIndex(next)}
+            >
               <Card
+                imageSrc={items[next].coverImage}
                 category={items[next].category}
                 title={items[next].title}
                 summary={items[next].summary}
@@ -78,14 +92,18 @@ export default function CardCarousel({ items = [], className = '' }) {
 
         {/* Mobile layout */}
         <div className="md:hidden w-full flex flex-col items-center gap-4">
-          <div className="w-full max-w-[19rem] sm:max-w-[20rem] transition-all duration-300">
+          <Link 
+            to={`/projects/${items[index].id}`} 
+            className="w-full max-w-[19rem] sm:max-w-[20rem] transition-all duration-300 block hover:scale-[1.02]"
+          >
             <Card
+              imageSrc={items[index].coverImage}
               category={items[index].category}
               title={items[index].title}
               summary={items[index].summary}
               featured
             />
-          </div>
+          </Link>
 
           <div className="flex items-center gap-3">
             <Button
@@ -116,10 +134,10 @@ export default function CardCarousel({ items = [], className = '' }) {
             key={i}
             onClick={() => setIndex(i)}
             aria-label={`Go to ${i + 1}`}
-            className={`w-2 h-2 rounded-full ${
+            className={`w-2 h-2 rounded-full transition-colors duration-200 ${
               i === index
-                ? 'bg-white'
-                : 'bg-gray-500/40'
+                ? 'bg-[var(--sketch-primary)] shadow-[0_0_6px_var(--sketch-primary)]'
+                : 'bg-gray-500/40 hover:bg-gray-500/70'
             }`}
           />
         ))}

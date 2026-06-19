@@ -438,3 +438,57 @@ body {
 .btn-fancy-secondary.active-nav-btn {
   background: rgba(217, 76, 255, 0.08);
 }
+
+/* ============================================================
+   ESTADOS DESHABILITADOS & COMPONENTES ADICIONALES
+   ============================================================ */
+
+/* Estilos de Botones Deshabilitados */
+.btn-fancy-primary:disabled,
+.btn-fancy-secondary:disabled,
+.btn-fancy-primary.disabled,
+.btn-fancy-secondary.disabled {
+  opacity: 0.35 !important;
+  cursor: not-allowed !important;
+  pointer-events: none !important;
+  border-style: dotted !important;
+}
+
+.btn-fancy-primary:disabled::before,
+.btn-fancy-secondary:disabled::before,
+.btn-fancy-primary.disabled::before,
+.btn-fancy-secondary.disabled::before {
+  display: none !important;
+}
+
+.btn-fancy-primary:disabled:hover,
+.btn-fancy-secondary:disabled:hover,
+.btn-fancy-primary.disabled:hover,
+.btn-fancy-secondary.disabled:hover {
+  background: transparent !important;
+  box-shadow: none !important;
+  color: inherit !important;
+}
+
+/* Reproductor de Video de Fondo (Estilo Netflix) */
+.video-background-wrapper {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 100vw;
+  height: 56.25vw; /* 16:9 Ratio (100 / 56.25 = 1.777) */
+  min-height: 100vh;
+  min-width: 177.77vh; /* 16:9 Ratio (100 * 1.777 = 177.77) */
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+  overflow: hidden;
+}
+
+/* Degradados y sombras sobre el video de portada */
+.video-overlay-glow {
+  background: linear-gradient(to top, var(--sketch-bg) 0%, rgba(10, 10, 12, 0.3) 50%, rgba(10, 10, 12, 0.75) 100%);
+}
+
+.video-overlay-side {
+  background: linear-gradient(to right, var(--sketch-bg) 0%, rgba(10, 10, 12, 0) 25%, rgba(10, 10, 12, 0) 75%, var(--sketch-bg) 100%);
+}
