@@ -12,6 +12,10 @@ import GoalCard from '../Components/ui/GoalCard';
 import EducationItem from '../Components/ui/EducationItem';
 import { FaGithub, FaLinkedin, FaInstagram, FaGamepad, FaFileAlt } from 'react-icons/fa';
 
+/*  imagenes    */
+
+import profilePic from '../assets/Images/FotoPerfil.png';
+
 const GRID_COLORS = [
   { name: 'Cian', value: '#00f0ff' }
 ];
@@ -23,6 +27,14 @@ const socialIcons = {
   'Itch.io': FaGamepad,
   CV: FaFileAlt,
 };
+
+// Arriba del componente (antes del return)
+const youtubeUrl = "https://youtu.be/7kKMODi9Vtg";
+
+// Extraer automáticamente el ID del video
+const videoId = youtubeUrl.match(
+  /(?:youtube\.com\/watch\?v=|youtu\.be\/)([^&]+)/,
+)?.[1];
 
 export default function HomePage() {
   const sceneRef = useRef(null);
@@ -102,7 +114,7 @@ export default function HomePage() {
 
   // Scroll spy to update the vertical menu and active section state
   useEffect(() => {
-    const ids = ['hero', 'about', 'skills', 'featured', 'stats', 'goals', 'education'];
+    const ids = ['hero', 'about', 'skills', 'Proyectos', 'stats', 'goals', 'education'];
     const io = new IntersectionObserver((entries) => {
       entries.forEach((e) => {
         if (e.isIntersecting) setCurrentSection(e.target.id || '');
@@ -249,18 +261,29 @@ export default function HomePage() {
           {/* Contenido en dos columnas */}
           <div className="flex flex-col md:flex-row items-center gap-12">
             {/* Columna izquierda: Espacio para foto (landscape) */}
-            <div className="w-full md:w-1/2 sketch-card p-2 flex items-center justify-center" style={{ minHeight: '350px' }}>
-              <div className="w-full h-full rounded-md flex items-center justify-center text-center" style={{
-                background: 'linear-gradient(135deg, rgba(0,18,30,0.6), rgba(0,36,54,0.4))',
-                border: '1px dashed var(--sketch-border-solid)',
-                color: 'var(--sketch-text-dim)'
-              }}>
-                <div>
-                  <div className="font-mono text-sm mb-2">Tu foto aquí</div>
-                  <div className="text-[10px] font-mono" style={{ opacity: 0.7 }}>Sube tu imagen en /src/assets o reemplázala aquí</div>
-                </div>
-              </div>
+{/* Columna izquierda: Foto */}
+<div
+  className="w-full md:w-1/2 sketch-card p-2"
+  style={{ minHeight: '350px' }}
+>
+  <div
+    className="relative w-full h-full overflow-hidden rounded-md"
+    style={{
+      background:
+        'linear-gradient(135deg, rgba(0,18,30,0.6), rgba(0,36,54,0.4))',
+      border: '1px dashed var(--sketch-border-solid)',
+    }}
+  >
+
+    <img
+      src={profilePic}
+      alt="Serbew"
+      className="w-full h-full object-cover rounded-md"
+      draggable={false}
+    />
+
             </div>
+          </div>
 
             {/* Columna derecha: Texto */}
             <div className="w-full md:w-1/2 flex flex-col gap-6">
@@ -305,29 +328,97 @@ export default function HomePage() {
       </section>
 
       {/* ========== FEATURED / CTA ========== */}
-      <section id="Proyectos" className="home-animate relative py-6 px-6 overflow-hidden" style={{ scrollMarginTop: '96px' }}>
-        <GridBackground color={gridColor} />
-        <div className="max-w-6xl mx-auto relative z-10">
-          <div className="flex items-center gap-4 mb-6">
-            <div className="sketch-line flex-1" />
-            <h2 className="font-sketch text-3xl tracking-wider text-glow" style={{ color: 'var(--sketch-primary)' }}>Proyectos y Experimentos</h2>
-            <div className="sketch-line flex-1" />
+<section
+  id="Proyectos"
+  className="home-animate relative py-6 px-6 overflow-hidden"
+  style={{ scrollMarginTop: '96px' }}
+>
+  <GridBackground color={gridColor} />
+
+  <div className="max-w-6xl mx-auto relative z-10">
+
+    <div className="flex items-center gap-4 mb-6">
+      <div className="sketch-line flex-1" />
+
+      <h2
+        className="font-sketch text-3xl tracking-wider text-glow"
+        style={{ color: 'var(--sketch-primary)' }}
+      >
+        Proyectos y Experimentos
+      </h2>
+
+      <div className="sketch-line flex-1" />
+    </div>
+
+
+    <div
+      className="sketch-card p-6 mb-6"
+      style={{ backdropFilter: 'blur(6px)' }}
+    >
+
+      <h3
+        className="font-sketch text-2xl"
+        style={{ color: 'var(--sketch-primary)' }}
+      >
+        Proyectos y Experiencias
+      </h3>
+
+      <p className="font-mono text-sm mt-3 text-(--sketch-text-dim)">
+        Cada proyecto representa una oportunidad para aprender,
+        experimentar y transformar ideas en experiencias interactivas.
+        Desde sistemas de videojuegos y herramientas de desarrollo hasta
+        aplicaciones web y efectos visuales, aquí encontrarás una muestra
+        de mi crecimiento, creatividad y pasión por construir soluciones
+        digitales.
+      </p>
+
+
+      <div className="mt-4">
+        <Button
+          variant="fancy-primary"
+          size="md"
+          onClick={() => {
+            window.location.href = '/projects#projects';
+          }}
+        >
+          Explorar proyectos
+        </Button>
+      </div>
+
+
+
+      {/* Showcase Video */}
+      <div
+        className="mt-6 overflow-hidden rounded-md border border-white/10"
+      >
+
+        {videoId ? (
+
+          <iframe
+            className="w-full aspect-video"
+            src={`https://www.youtube.com/embed/${videoId}?autoplay=1&mute=1&loop=1&playlist=${videoId}&controls=1&rel=0`}
+            title="Showcase Video"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowFullScreen
+          />
+
+        ) : (
+
+          <div
+            className="h-[420px] flex items-center justify-center font-mono text-sm text-(--sketch-text-dim)"
+          >
+            Introduce un enlace válido de YouTube
           </div>
 
-          <div className="sketch-card p-6 mb-6" style={{ backdropFilter: 'blur(6px)' }}>
-            <h3 className="font-sketch text-2xl" style={{ color: 'var(--sketch-primary)' }}>Proyectos y Experiencias</h3>
-            <p className="font-mono text-sm mt-3 text-(--sketch-text-dim)">Cada proyecto representa una oportunidad para aprender, experimentar y transformar ideas en experiencias interactivas. Desde sistemas de videojuegos y herramientas de desarrollo hasta aplicaciones web y efectos visuales, aquí encontrarás una muestra de mi crecimiento, creatividad y pasión por construir soluciones digitales.</p>
-            <div className="mt-4">
-              <Button variant="fancy-primary" size="md" onClick={() => { window.location.href = '/projects#projects'; }}>Explorar proyectos</Button>
-            </div>
+        )}
 
-            <div className="mt-6 w-full bg-black rounded-md overflow-hidden" style={{ minHeight: '320px' }}>
-              {/* Video/embed placeholder */}
-              <div className="w-full h-full flex items-center justify-center text-[12px] font-mono text-(--sketch-text-dim)">Video showcase placeholder — replace with &lt;iframe&gt; or &lt;video&gt;</div>
-            </div>
-          </div>
-        </div>
-      </section>
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
 
       {/* ========== STATISTICS ========== */}
       <section id="stats" className="home-animate relative py-16 px-6 overflow-hidden" style={{ scrollMarginTop: '96px' }}>

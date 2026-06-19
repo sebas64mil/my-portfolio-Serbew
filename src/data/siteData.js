@@ -34,7 +34,9 @@ import { RiTailwindCssFill } from "react-icons/ri";
 
 import { MdSportsEsports } from "react-icons/md";
 
-import { SiVrchat } from "react-icons/si";
+import { SiVrchat,
+          SiDavinciresolve 
+ } from "react-icons/si";
 
 import AsepriteIcon from '../Components/IconsExcepcion/AsepriteIcon.jsx';
 import SubstancePainterIcon from '../Components/IconsExcepcion/SubstanceIcon.jsx';
@@ -102,6 +104,7 @@ skills: [
         { name: 'Blender 3D', icon: TbBrandBlender },
         { name: 'Aseprite', icon: AsepriteIcon },
         { name: 'Substance Painter', icon: SubstancePainterIcon },
+        { name: 'DaVinci Resolve', icon: SiDavinciresolve },
       ],
     },
   },
