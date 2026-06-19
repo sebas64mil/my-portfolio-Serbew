@@ -17,7 +17,7 @@ import { FaGithub, FaLinkedin, FaInstagram, FaGamepad, FaFileAlt } from 'react-i
 import profilePic from '../assets/Images/FotoPerfil.png';
 
 const GRID_COLORS = [
-  { name: 'Cian', value: '#00f0ff' }
+  { name: 'Color Primario', value: siteData.theme.primary }
 ];
 
 const socialIcons = {
@@ -39,7 +39,7 @@ const videoId = youtubeUrl.match(
 export default function HomePage() {
   const sceneRef = useRef(null);
   const location = useLocation();
-  const [gridColor, setGridColor] = useState('#00f0ff');
+  const [gridColor, setGridColor] = useState(siteData.theme.primary);
 
   // visibility and stats animation state
   const [visible, setVisible] = useState({});

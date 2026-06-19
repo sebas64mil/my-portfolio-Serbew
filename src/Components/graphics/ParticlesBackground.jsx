@@ -67,9 +67,10 @@ export default function ParticlesBackground({ color = '#00f0ff', count = 300, bl
     window.addEventListener('resize', onResize);
 
     let rafId;
-    const clock = new THREE.Clock();
-    function animate() {
-      const t = clock.getElapsedTime();
+    const timer = new THREE.Timer();
+    function animate(timestamp) {
+      timer.update(timestamp);
+      const t = timer.getElapsed();
       points.rotation.y = t * 0.02;
       points.rotation.x = Math.sin(t * 0.15) * 0.02;
       renderer.render(scene, camera);

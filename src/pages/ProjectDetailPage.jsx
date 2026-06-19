@@ -7,6 +7,7 @@ import GridBackground from '../Components/graphics/GridBackground';
 import { webProjects, gameProjects } from '../data/projectsData';
 import { siteData } from '../data/siteData';
 import { FaGamepad, FaGithub } from 'react-icons/fa';
+import ReactMarkdown from 'react-markdown';
 
 export default function ProjectDetailPage() {
   const { id } = useParams();
@@ -152,8 +153,8 @@ export default function ProjectDetailPage() {
       >
         <GridBackground color="#d94cff" />
         <div className="sketch-card p-8 text-center max-w-md relative z-10">
-          <h1 className="font-sketch text-3xl text-glow mb-4 text-[var(--sketch-secondary)]">Proyecto no encontrado</h1>
-          <p className="font-mono text-sm text-[var(--sketch-text-dim)] mb-6">
+          <h1 className="font-sketch text-3xl text-glow mb-4 text-(--sketch-secondary)">Proyecto no encontrado</h1>
+          <p className="font-mono text-sm text-(--sketch-text-dim)">
             El proyecto con ID "{id}" no se encuentra registrado en el sistema.
           </p>
           <Link to="/projects">
@@ -172,7 +173,7 @@ export default function ProjectDetailPage() {
       style={{ background: 'var(--sketch-bg)', overflowX: 'hidden' }}
     >
       {/* Grid background for the page */}
-      <GridBackground color={project.category === 'Web' ? '#00f0ff' : '#d94cff'} opacity={0.15} />
+      <GridBackground color={project.category === 'Web' ? '#00f0ff' : '#00f0ff'} opacity={0.5} />
 
       {/* Navbar with only secondary (page) links */}
       <Navbar localLinks={[]} pageLinks={pageLinks} />
@@ -209,14 +210,14 @@ export default function ProjectDetailPage() {
           )}
 
           {/* Dark gradients for text contrast */}
-          <div className="absolute inset-0 bg-gradient-to-t from-[var(--sketch-bg)] via-[#0a0a0c40] to-[#0a0a0ce0] z-10" />
-          <div className="absolute inset-0 bg-gradient-to-r from-[var(--sketch-bg)] via-transparent to-[var(--sketch-bg)] opacity-60 z-10 hidden md:block" />
+          <div className="absolute inset-0 bg-linear-to-t from-(--sketch-bg) via-[#0a0a0c40] to-[#0a0a0ce0] z-10" />
+          <div className="absolute inset-0 bg-linear-to-r from-(--sketch-bg) via-transparent to-(--sketch-bg) opacity-60 z-10 hidden md:block" />
         </div>
 
         {/* Banner Content */}
         <div className="relative z-20 w-[92%] max-w-4xl mx-auto pb-12 px-4 md:px-0">
           <div className="max-w-2xl text-left">
-            {/* Category and Game Type Tags */}
+            {/* Category Tag */}
             <div className="flex flex-wrap gap-2 items-center">
               <span 
                 className="font-mono text-xs uppercase tracking-widest px-2.5 py-0.5 rounded-sm border inline-block"
@@ -227,15 +228,6 @@ export default function ProjectDetailPage() {
               >
                 {project.category === 'Web' ? 'Desarrollo Web' : 'Videojuegos'}
               </span>
-
-              {project.gameTypes && project.gameTypes.map((type) => (
-                <span 
-                  key={type}
-                  className="font-mono text-[10px] uppercase tracking-wider px-2 py-0.5 rounded-sm bg-[#1a1a22]/90 text-white border border-gray-700/60"
-                >
-                  {type}
-                </span>
-              ))}
             </div>
 
             <h1 
@@ -245,7 +237,7 @@ export default function ProjectDetailPage() {
               {project.title}
             </h1>
 
-            <p className="font-mono text-sm md:text-base mt-4 text-[var(--sketch-text)] leading-relaxed max-w-xl">
+            <p className="font-mono text-sm md:text-base mt-4 text-(--sketch-text) leading-relaxed max-w-xl">
               {project.summary}
             </p>
 
@@ -282,22 +274,17 @@ export default function ProjectDetailPage() {
               </div>
             )}
 
-            {/* Tools / Technologies Tags with Icons */}
-            {project.tools && project.tools.length > 0 && (
-              <div className="mt-6 flex flex-wrap gap-2 items-center">
-                <span className="font-mono text-xs text-[var(--sketch-text-dim)] uppercase mr-2">Herramientas:</span>
-                {project.tools.map((tool) => {
-                  const ToolIcon = getToolIcon(tool);
-                  return (
-                    <span 
-                      key={tool}
-                      className="font-mono text-xs px-2.5 py-1 bg-[#111115]/90 border border-[var(--sketch-border-solid)] rounded-sm text-[var(--sketch-primary)] hover:border-[var(--sketch-primary)] transition-colors flex items-center gap-1.5"
-                    >
-                      {ToolIcon && <ToolIcon className="text-xs" />}
-                      {tool}
-                    </span>
-                  );
-                })}
+            {/* Game Type Tags — below the action button */}
+            {project.gameTypes && project.gameTypes.length > 0 && (
+              <div className="mt-4 flex flex-wrap gap-1.5 items-center">
+                {project.gameTypes.map((type) => (
+                  <span
+                    key={type}
+                    className="font-mono text-[10px] uppercase tracking-wider px-2 py-0.5 rounded-sm bg-[#1a1a22]/90 text-white border border-gray-700/60"
+                  >
+                    {type}
+                  </span>
+                ))}
               </div>
             )}
           </div>
@@ -305,7 +292,30 @@ export default function ProjectDetailPage() {
       </section>
 
       {/* Separator Line */}
-      <div className="w-[92%] max-w-4xl mx-auto border-t border-dashed border-[var(--sketch-border-solid)] my-1 opacity-50" />
+      <div className="w-[92%] max-w-4xl mx-auto border-t border-dashed border-(--sketch-border-solid) my-1 opacity-50" />
+
+      {/* ============================================================
+         TOOLS / TECHNOLOGIES STRIP
+         ============================================================ */}
+      {project.tools && project.tools.length > 0 && (
+        <div className="w-[92%] max-w-4xl mx-auto px-4 md:px-0 mt-6 mb-2">
+          <div className="flex flex-wrap gap-2 items-center">
+            <span className="font-mono text-xs text-(--sketch-text-dim) uppercase tracking-widest mr-2">Herramientas:</span>
+            {project.tools.map((tool) => {
+              const ToolIcon = getToolIcon(tool);
+              return (
+                <span
+                  key={tool}
+                  className="font-mono text-xs px-3 py-1.5 bg-[#111115]/90 border border-(--sketch-border-solid) rounded-sm text-(--sketch-primary) hover:border-(--sketch-primary) hover:bg-[#1a1a22]/90 transition-all duration-200 flex items-center gap-1.5 shadow-sm"
+                >
+                  {ToolIcon && <ToolIcon className="text-sm" />}
+                  {tool}
+                </span>
+              );
+            })}
+          </div>
+        </div>
+      )}
 
       {/* ============================================================
          DETAILS & IMAGES CONTAINER SECTION
@@ -321,11 +331,32 @@ export default function ProjectDetailPage() {
             >
               Detalles del Proyecto
             </h2>
-            <div className="font-mono text-sm leading-relaxed text-[var(--sketch-text)] space-y-4 pt-2">
+            <div className="project-description font-mono text-sm leading-relaxed text-(--sketch-text) space-y-3 pt-2">
               {project.extendedDetails ? (
-                project.extendedDetails.split('\n\n').map((paragraph, index) => (
-                  <p key={index}>{paragraph}</p>
-                ))
+                <ReactMarkdown
+                  components={{
+                    p: ({ children }) => <p className="mb-3 last:mb-0">{children}</p>,
+                    strong: ({ children }) => <strong className="font-bold text-(--sketch-primary)">{children}</strong>,
+                    em: ({ children }) => <em className="italic text-(--sketch-text)">{children}</em>,
+                    ul: ({ children }) => <ul className="list-disc list-inside space-y-1 pl-2 my-2">{children}</ul>,
+                    ol: ({ children }) => <ol className="list-decimal list-inside space-y-1 pl-2 my-2">{children}</ol>,
+                    li: ({ children }) => <li className="text-(--sketch-text) leading-relaxed">{children}</li>,
+                    h3: ({ children }) => <h3 className="font-sketch text-lg text-(--sketch-secondary) mt-4 mb-1">{children}</h3>,
+                    h4: ({ children }) => <h4 className="font-bold text-(--sketch-primary) text-sm mt-3 mb-1 uppercase tracking-wide">{children}</h4>,
+                    blockquote: ({ children }) => (
+                      <blockquote className="border-l-2 border-(--sketch-secondary) pl-3 italic text-(--sketch-text-dim) my-3">
+                        {children}
+                      </blockquote>
+                    ),
+                    code: ({ children }) => (
+                      <code className="bg-[#111115] border border-(--sketch-border-solid) px-1.5 py-0.5 rounded text-xs text-(--sketch-secondary) font-mono">
+                        {children}
+                      </code>
+                    ),
+                  }}
+                >
+                  {project.extendedDetails}
+                </ReactMarkdown>
               ) : (
                 <p>No se dispone de detalles extendidos sobre este proyecto.</p>
               )}
@@ -333,9 +364,9 @@ export default function ProjectDetailPage() {
 
             {/* Publication Details Info Text */}
             {project.publishUrl && (
-              <div className="mt-4 pt-4 border-t border-dashed border-[var(--sketch-border-solid)]">
-                <p className="font-mono text-xs text-[var(--sketch-text-dim)]">
-                  <span className="text-[var(--sketch-primary)] font-bold">Publicación: </span>
+              <div className="mt-4 pt-4 border-t border-dashed border-(--sketch-border-solid)">
+                <p className="font-mono text-xs text-(--sketch-text-dim)">
+                  <span className="text-(--sketch-primary) font-bold">Publicación: </span>
                   {project.publishPlatform === 'itchio' ? (
                     <>
                       Proyecto publicado en{' '}
@@ -343,7 +374,7 @@ export default function ProjectDetailPage() {
                         href={project.publishUrl} 
                         target="_blank" 
                         rel="noopener noreferrer" 
-                        className="underline text-[var(--sketch-secondary)] hover:text-white transition-colors"
+                        className="underline text-(--sketch-secondary) hover:text-white transition-colors"
                       >
                         Itch.io
                       </a>{' '}
@@ -356,7 +387,7 @@ export default function ProjectDetailPage() {
                         href={project.publishUrl} 
                         target="_blank" 
                         rel="noopener noreferrer" 
-                        className="underline text-[var(--sketch-primary)] hover:text-white transition-colors"
+                        className="underline text-(--sketch-primary) hover:text-white transition-colors"
                       >
                         GitHub
                       </a>{' '}
@@ -377,12 +408,12 @@ export default function ProjectDetailPage() {
               Imágenes del Juego
             </h2>
             {project.images && project.images.length > 0 ? (
-              <div className="grid grid-cols-2 gap-3 pt-2">
+              <div className="flex flex-col gap-4 pt-2">
                 {project.images.map((imgSrc, index) => (
                   <div 
                     key={index}
                     onClick={() => setSelectedImage(imgSrc)}
-                    className="relative aspect-video rounded-sm overflow-hidden cursor-pointer border border-dashed border-[var(--sketch-border-solid)] hover:border-[var(--sketch-secondary)] transition-all duration-300 group shadow-md"
+                    className="relative aspect-video rounded-sm overflow-hidden cursor-pointer border border-dashed border-(--sketch-border-solid) hover:border-(--sketch-secondary) transition-all duration-300 group shadow-md"
                   >
                     <img 
                       src={imgSrc} 
@@ -390,12 +421,15 @@ export default function ProjectDetailPage() {
                       className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                     />
                     <div className="absolute inset-0 bg-black/20 group-hover:bg-transparent transition-colors duration-200" />
+                    <span className="absolute bottom-2 right-2 font-mono text-[10px] text-white/60 bg-black/50 px-1.5 py-0.5 rounded-sm">
+                      {index + 1} / {project.images.length}
+                    </span>
                   </div>
                 ))}
               </div>
             ) : (
-              <div className="py-12 text-center border border-dashed border-[var(--sketch-border-solid)] rounded-sm">
-                <p className="font-mono text-sm text-[var(--sketch-text-dim)]">
+              <div className="py-12 text-center border border-dashed border-(--sketch-border-solid) rounded-sm">
+                <p className="font-mono text-sm text-(--sketch-text-dim)">
                   No hay capturas disponibles para este proyecto.
                 </p>
               </div>
@@ -409,19 +443,19 @@ export default function ProjectDetailPage() {
          ============================================================ */}
       {selectedImage && (
         <div 
-          className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-black/90 backdrop-blur-md transition-opacity duration-300"
+          className="fixed inset-0 z-100 flex items-center justify-center p-4 bg-black/90 backdrop-blur-md transition-opacity duration-300"
           onClick={() => setSelectedImage(null)}
         >
           <div className="relative max-w-4xl max-h-[85vh] animate-zoom-in" onClick={(e) => e.stopPropagation()}>
             <img 
               src={selectedImage} 
               alt="Screenshot Zoom" 
-              className="w-full h-auto max-h-[80vh] object-contain border border-[var(--sketch-primary)] shadow-[0_0_25px_rgba(0,240,255,0.45)]"
+              className="w-full h-auto max-h-[80vh] object-contain border border-(--sketch-primary) shadow-[0_0_25px_rgba(0,240,255,0.45)]"
             />
             
             {/* Close Button */}
             <button 
-              className="absolute -top-3 -right-3 w-8 h-8 rounded-full flex items-center justify-center bg-black border border-[var(--sketch-primary)] text-[var(--sketch-primary)] font-mono hover:bg-[var(--sketch-primary)] hover:text-black transition-colors duration-200 shadow-md"
+              className="absolute -top-3 -right-3 w-8 h-8 rounded-full flex items-center justify-center bg-black border border-(--sketch-primary) text-(--sketch-primary) font-mono hover:bg-(--sketch-primary) hover:text-black transition-colors duration-200 shadow-md"
               onClick={() => setSelectedImage(null)}
               aria-label="Cerrar vista"
             >

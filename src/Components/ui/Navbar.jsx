@@ -135,7 +135,7 @@ export default function Navbar({ localLinks, pageLinks, basePath }) {
       {/* Mobile drawer + overlay */}
       <div
         className={`fixed inset-0 z-50 md:hidden transition-opacity duration-300 ${menuOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'}`}
-        aria-hidden={!menuOpen}
+        inert={!menuOpen ? '' : undefined}
       >
         <button
           type="button"

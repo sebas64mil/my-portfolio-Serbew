@@ -22,7 +22,7 @@ function WireframeScene() {
     renderer.setClearColor(0x000000, 0);
     mountRef.current.appendChild(renderer.domElement);
 
-    const clock = new THREE.Clock();
+    const timer = new THREE.Timer();
 
     let sharedMaterial = null;
     const rotatableMeshes = [];
@@ -109,9 +109,10 @@ function WireframeScene() {
     window.addEventListener('resize', onResize);
     onResize();
 
-    function animate() {
-      const delta = clock.getDelta();
-      const elapsed = clock.getElapsedTime();
+    function animate(timestamp) {
+      timer.update(timestamp);
+      const delta = timer.getDelta();
+      const elapsed = timer.getElapsed();
 
       if (sharedMaterial?.uniforms?.uTime) sharedMaterial.uniforms.uTime.value = elapsed;
 

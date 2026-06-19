@@ -42,6 +42,14 @@ import AsepriteIcon from '../Components/IconsExcepcion/AsepriteIcon.jsx';
 import SubstancePainterIcon from '../Components/IconsExcepcion/SubstanceIcon.jsx';
 
 export const siteData = {
+  // --- Colores del Tema Centralizados ---
+  theme: {
+    primary: '#00f0ff',     // Color Primario (Cian)
+    secondary: '#d94cff',   // Color Secundario (Magenta)
+    bg: '#0a0a0c',          // Color de Fondo
+    line: '#1a1a22',        // Color de Líneas de Cuadrícula
+  },
+
   // --- Identidad ---
   nickname: 'Serbew',
   slogan: 'De bocetos a proyectos',
