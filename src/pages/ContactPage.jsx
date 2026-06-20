@@ -6,6 +6,9 @@ import Button from '../Components/ui/Button';
 import Footer from '../Components/ui/Footer';
 import { FaGithub, FaLinkedin, FaInstagram, FaGamepad, FaFileAlt } from 'react-icons/fa';
 import { siteData } from '../data/siteData';
+import gameServicesImg from '../assets/Images/Services/GameServices.png';
+import webServicesImg from '../assets/Images/Services/WebServices.png';
+import extraServicesImg from '../assets/Images/Services/ExtraServices.png';
 
 
 const socialIcons = {
@@ -66,13 +69,41 @@ export default function ContactPage() {
                   {offer === 'games' ? 'Desarrollo de prototipos, sistemas de juego y experiencias interactivas utilizando motores modernos y herramientas especializadas. ' : offer === 'web' ? 'Diseño y desarrollo de sitios web modernos, interactivos y responsivos.' : 'Herramientas de desarrollo, efectos visuales y soluciones personalizadas para proyectos creativos.'}
                 </p>
                 <div className="mt-4">
-                  <Button variant="fancy-primary" size="sm" onClick={() => { /* placeholder */ }}>Contactar</Button>
+                  <Button
+                  variant="fancy-primary"
+                  size="sm"
+                  href={`mailto:vsebasjrincon12@gmail.com?subject=${encodeURIComponent('Contacto desde el portafolio - ' + (offer === 'games' ? 'Desarrollo de Videojuegos' : offer === 'web' ? 'Desarrollo Web' : 'Servicios Extras'))}`}
+                >
+                  Contactar por Gmail
+                </Button>
                 </div>
               </div>
 
               <div className="flex items-center justify-center">
-                <div className="w-full h-40 border border-dashed rounded-md flex items-center justify-center text-center text-sm font-mono text-(--sketch-text-dim)">
-                  Espacio para imagen (sube en src/assets y reemplaza)
+                <div className="relative w-full overflow-hidden rounded-md border border-dashed" style={{ borderColor: 'var(--sketch-border-solid)' }}>
+                  {[
+                    { key: 'games', src: gameServicesImg, alt: 'Servicios de Desarrollo de Juegos' },
+                    { key: 'web',   src: webServicesImg,  alt: 'Servicios de Desarrollo Web' },
+                    { key: 'extras',src: extraServicesImg,alt: 'Servicios Extras' },
+                  ].map(({ key, src, alt }) => (
+                    <img
+                      key={key}
+                      src={src}
+                      alt={alt}
+                      className="w-full h-48 object-cover transition-all duration-500"
+                      style={{
+                        display: offer === key ? 'block' : 'none',
+                        opacity: offer === key ? 1 : 0,
+                      }}
+                    />
+                  ))}
+                  {/* Subtle overlay gradient */}
+                  <div
+                    className="absolute inset-0 pointer-events-none"
+                    style={{
+                      background: 'linear-gradient(to bottom, transparent 60%, rgba(10,10,13,0.55) 100%)',
+                    }}
+                  />
                 </div>
               </div>
             </div>
