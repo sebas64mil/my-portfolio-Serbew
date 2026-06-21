@@ -56,9 +56,45 @@ export const siteData = {
   heroDescription: 'Bienvenido/a a mi portafolio, disfruta del recorrido.',
 
   // --- Sobre mí ---
+  // aboutDescription: array de segmentos de texto.
+  // Cada segmento puede ser:
+  //   { text: 'texto plano' }                        → texto normal
+  //   { text: 'término', bold: true, color: 'primary' }   → negrilla cian
+  //   { text: 'término', bold: true, color: 'secondary' }  → negrilla magenta
+  //   { text: 'término', bold: true, color: 'text' }       → negrilla blanca
   aboutTitle: 'Serbew',
-  aboutDescription:
-    'Transformo ideas en experiencias inmersivas combinando desarrollo de videojuegos, aplicaciones web interactivas y efectos visuales creativos. Disfruto explorar nuevas tecnologías, diseñar sistemas y construir soluciones que permitan llevar un concepto desde sus primeros bocetos hasta una experiencia completa e interactiva.',
+  aboutDescription: [
+    { text: 'Ingeniero Multimedia',          bold: true,  color: 'primary'   },
+    { text: ' especializado en ' },
+    { text: 'desarrollo de videojuegos',     bold: true,  color: 'primary'   },
+    { text: ', ' },
+    { text: 'desarrollo web',                bold: true,  color: 'primary'   },
+    { text: ' y ' },
+    { text: 'arte técnico',                  bold: true,  color: 'secondary' },
+    { text: '. Me apasiona transformar ideas en ' },
+    { text: 'experiencias interactivas',     bold: true,  color: 'primary'   },
+    { text: ', combinando ' },
+    { text: 'programación',   },
+    { text: ', ' },
+    { text: 'diseño de sistemas',  },
+    { text: ', ' },
+    { text: 'efectos visuales',              bold: true,  color: 'secondary' },
+    { text: ' y ' },
+    { text: 'herramientas digitales',   },
+    { text: ' para llevar un concepto desde sus primeros ' },
+    { text: 'bocetos',                       bold: true,  color: 'primary'   },
+    { text: ' hasta un ' },
+    { text: 'producto funcional y atractivo', bold: true, color: 'primary'   },
+    { text: '. Disfruto explorar nuevas ' },
+    { text: 'tecnologías',                   bold: true,  color: 'secondary' },
+    { text: ', crear ' },
+    { text: 'soluciones innovadoras', },
+    { text: ' y desarrollar proyectos que integren ' },
+    { text: 'creatividad',                   bold: true,  color: 'primary'   },
+    { text: ' y ' },
+    { text: 'tecnología',                    bold: true,  color: 'primary'   },
+    { text: ' de manera significativa.' },
+  ],
 
   // --- Navegación ---
   navLocalLinks: [

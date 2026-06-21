@@ -298,7 +298,19 @@ export default function HomePage() {
                 className="font-mono text-sm leading-relaxed"
                 style={{ color: 'var(--sketch-text-dim)' }}
               >
-                {siteData.aboutDescription}
+                {siteData.aboutDescription.map((seg, i) => {
+                  if (!seg.bold) return <span key={i}>{seg.text}</span>;
+                  const colorMap = {
+                    primary:   { color: 'var(--sketch-primary)',   textShadow: '0 0 8px rgba(0,240,255,0.5)' },
+                    secondary: { color: 'var(--sketch-secondary)', textShadow: '0 0 8px rgba(217,76,255,0.5)' },
+                    text:      { color: 'var(--sketch-text)' },
+                  };
+                  return (
+                    <strong key={i} style={colorMap[seg.color] || colorMap.text}>
+                      {seg.text}
+                    </strong>
+                  );
+                })}
               </p>
             </div>
           </div>
