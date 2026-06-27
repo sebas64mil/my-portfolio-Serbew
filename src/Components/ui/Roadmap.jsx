@@ -32,6 +32,7 @@ export default function Roadmap({ initial = 'Inventory' }) {
 
   const compactLayout = viewportWidth < 1024;
   const itemsPerRow = viewportWidth < 480 ? 1 : 2;
+  const desktopItemsPerRow = 4;
 
   const compactRows = useMemo(() => {
     if (!compactLayout) return [];
@@ -42,6 +43,14 @@ export default function Roadmap({ initial = 'Inventory' }) {
     return rows;
   }, [compactLayout, itemsPerRow, mapState.nodes]);
 
+  const desktopRows = useMemo(() => {
+    const rows = [];
+    for (let i = 0; i < mapState.nodes.length; i += desktopItemsPerRow) {
+      rows.push(mapState.nodes.slice(i, i + desktopItemsPerRow));
+    }
+    return rows;
+  }, [desktopItemsPerRow, mapState.nodes]);
+
   const calcLines = useCallback(() => {
     const cont = containerRef.current;
     if (!cont || !mapState) return;
@@ -49,8 +58,8 @@ export default function Roadmap({ initial = 'Inventory' }) {
     const newLines = [];
 
     for (let i = 0; i < mapState.nodes.length - 1; i++) {
-      const aEl = nodeRefs.current[mapState.nodes[i].id];
-      const bEl = nodeRefs.current[mapState.nodes[i + 1].id];
+      const aEl = nodeRefs.current[i];
+      const bEl = nodeRefs.current[i + 1];
       if (!aEl || !bEl) continue;
       const ar = aEl.getBoundingClientRect();
       const br = bEl.getBoundingClientRect();
@@ -60,7 +69,15 @@ export default function Roadmap({ initial = 'Inventory' }) {
       const by = br.top + br.height / 2 - rect.top;
       const length = Math.hypot(bx - ax, by - ay);
       const progress = mapState.nodes[i].completed ? 1 : 0; // progress depends on source node
-      newLines.push({ x1: ax, y1: ay, x2: bx, y2: by, id: `${mapState.nodes[i].id}-${mapState.nodes[i + 1].id}`, length, progress });
+      newLines.push({ 
+        x1: ax, 
+        y1: ay, 
+        x2: bx, 
+        y2: by, 
+        id: `line-${i}-${i+1}`, 
+        length, 
+        progress 
+      });
     }
 
     setLines(newLines);
@@ -86,13 +103,13 @@ export default function Roadmap({ initial = 'Inventory' }) {
     return () => clearTimeout(t);
   }, [mapState, calcLines]);
 
-  const openNode = (id) => setActiveNode(id);
+  const openNode = (index) => setActiveNode(index);
 
-  const toggleComplete = (id) => {
+  const toggleComplete = (index) => {
     setMapState((prev) => {
       const next = {
         ...prev,
-        nodes: prev.nodes.map((n) => (n.id === id ? { ...n, completed: !n.completed } : n)),
+        nodes: prev.nodes.map((n, idx) => (idx === index ? { ...n, completed: !n.completed } : n)),
       };
       return next;
     });
@@ -172,27 +189,42 @@ export default function Roadmap({ initial = 'Inventory' }) {
           ))}
         </svg>
 
-        <div className="hidden lg:flex items-center justify-center gap-6 py-8">
-          {mapState.nodes.map((node) => {
-            const completed = !!node.completed;
+        <div className="hidden lg:flex flex-col gap-6 py-8">
+          {desktopRows.map((row, rowIndex) => {
+            const reversed = rowIndex % 2 === 1;
             return (
               <div
-                key={node.id}
-                ref={(el) => (nodeRefs.current[node.id] = el)}
-                onClick={() => openNode(node.id)}
-                className={`sketch-card p-4 text-center cursor-pointer transition-transform relative ${activeNode === node.id ? 'scale-105' : ''}`}
-                style={{
-                  minWidth: '180px',
-                  borderColor: completed ? 'var(--sketch-primary)' : undefined,
-                  boxShadow: completed ? '0 0 12px rgba(0,240,255,0.06)' : undefined,
-                }}
+                key={`drow-${rowIndex}`}
+                className={`flex gap-6 ${reversed ? 'flex-row-reverse' : 'flex-row'}`}
               >
-                {completed && (
-                  <span style={{ position: 'absolute', top: 8, right: 8, fontSize: 12, color: 'var(--sketch-primary)' }}>✓</span>
-                )}
+                {row.map((node, nodeIdx) => {
+                  const completed = !!node.completed;
+                  const originalIdx = rowIndex * desktopItemsPerRow + nodeIdx;
+                  return (
+                    <div
+                      key={`${node.id}-${originalIdx}`}
+                      ref={(el) => (nodeRefs.current[originalIdx] = el)}
+                      onClick={() => openNode(originalIdx)}
+                      className={`sketch-card flex-1 p-4 text-center cursor-pointer transition-transform relative ${activeNode === originalIdx ? 'scale-105' : ''}`}
+                      style={{
+                        minWidth: '180px',
+                        borderColor: completed ? 'var(--sketch-primary)' : undefined,
+                        boxShadow: completed ? '0 0 12px rgba(0,240,255,0.06)' : undefined,
+                      }}
+                    >
+                      {completed && (
+                        <span style={{ position: 'absolute', top: 8, right: 8, fontSize: 12, color: 'var(--sketch-primary)' }}>✓</span>
+                      )}
 
-                <div className="font-mono text-xs opacity-80">{mapState.title}</div>
-                <div className="font-sketch text-lg mt-1">{node.label}</div>
+                      <div className="font-mono text-xs opacity-80">{mapState.title}</div>
+                      <div className="font-sketch text-lg mt-1">{node.label}</div>
+                    </div>
+                  );
+                })}
+                {/* Fill empty slots to maintain consistent column widths */}
+                {row.length < desktopItemsPerRow && Array.from({ length: desktopItemsPerRow - row.length }).map((_, i) => (
+                  <div key={`empty-${i}`} className="flex-1" style={{ minWidth: '180px' }} aria-hidden="true" />
+                ))}
               </div>
             );
           })}
@@ -206,14 +238,15 @@ export default function Roadmap({ initial = 'Inventory' }) {
                 key={`row-${rowIndex}`}
                 className={`flex w-full gap-4 ${reversed ? 'flex-row-reverse' : 'flex-row'}`}
               >
-                {row.map((node) => {
+                {row.map((node, nodeIdx) => {
                   const completed = !!node.completed;
+                  const originalIdx = rowIndex * itemsPerRow + nodeIdx;
                   return (
                     <div
-                      key={node.id}
-                      ref={(el) => (nodeRefs.current[node.id] = el)}
-                      onClick={() => openNode(node.id)}
-                      className={`sketch-card flex-1 min-w-0 p-3 text-center cursor-pointer transition-transform relative ${activeNode === node.id ? 'scale-[1.02]' : ''}`}
+                      key={`${node.id}-${originalIdx}`}
+                      ref={(el) => (nodeRefs.current[originalIdx] = el)}
+                      onClick={() => openNode(originalIdx)}
+                      className={`sketch-card flex-1 min-w-0 p-3 text-center cursor-pointer transition-transform relative ${activeNode === originalIdx ? 'scale-[1.02]' : ''}`}
                       style={{
                         borderColor: completed ? 'var(--sketch-primary)' : undefined,
                         boxShadow: completed ? '0 0 12px rgba(0,240,255,0.06)' : undefined,
@@ -236,10 +269,10 @@ export default function Roadmap({ initial = 'Inventory' }) {
       </div>
 
       {/* Details / controls */}
-      {activeNode && (
+      {activeNode !== null && (
         <div className="mt-4 sketch-card p-4 flex items-start justify-between">
           {(() => {
-            const n = mapState.nodes.find((x) => x.id === activeNode);
+            const n = mapState.nodes[activeNode];
             if (!n) return null;
             return (
               <div className="flex-1 min-w-0">
@@ -275,7 +308,6 @@ export default function Roadmap({ initial = 'Inventory' }) {
               </div>
             );
           })()}
-
         </div>
       )}
     </div>

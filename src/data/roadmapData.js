@@ -7,7 +7,8 @@ export const roadmaps = [
     nodes: [
       { id: 'Basic', label: 'Inventario Básico', desc: 'Menu donde se gestionan los objetos tanto en la recolección como en el uso.', completed: false },
       { id: 'flex_Inventory', label: 'Inventario Flexible', desc: 'segun el elemento recolectado abarca mayor o menos espacio en el inventario.', completed: false },
-      { id: 'slot_inventory', label: 'Inventario con Slots', desc: 'puedes mover objetos a los slots de uso y de atajos los cuales al oprimir un input específico se activan.', completed: false },
+      { id: 'slot_inventory', label: 'Slots complementarios', desc: 'puedes mover objetos a los slots de uso y de atajos los cuales al oprimir un input específico se activan.', completed: false },
+      { id: 'quick_slots', label: 'Slots Rápidos y Atajos', desc: 'Asignación de objetos, armas o habilidades a espacios rápidos (1, 2, 3...) para utilizarlos instantáneamente mediante entradas del jugador, similar a juegos como Valorant, Minecraft o Terraria.', completed: false },
       { id: 'inventario_Multiple', label: 'Inventario Múltiple', desc: 'como en juegos tipo sandbox , hay diferentes tipos de almacenamientos como en cofres y demas asi junto a 9 slot de uso', completed: false }
     ]
   },
