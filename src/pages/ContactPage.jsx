@@ -4,7 +4,7 @@ import GridBackground from '../Components/graphics/GridBackground';
 import ParticlesBackground from '../Components/graphics/ParticlesBackground';
 import Button from '../Components/ui/Button';
 import Footer from '../Components/ui/Footer';
-import { FaGithub, FaLinkedin, FaInstagram, FaGamepad, FaFileAlt } from 'react-icons/fa';
+import { FaGithub, FaLinkedin, FaInstagram, FaGamepad, FaFileAlt, FaBehance, FaArtstation } from 'react-icons/fa';
 import { siteData } from '../data/siteData';
 import gameServicesImg from '../assets/Images/Services/GameServices.png';
 import webServicesImg from '../assets/Images/Services/WebServices.png';
@@ -15,6 +15,8 @@ const socialIcons = {
   GitHub: FaGithub,
   LinkedIn: FaLinkedin,
   Instagram: FaInstagram,
+  Behance: FaBehance,
+  ArtStation: FaArtstation,
   'Itch.io': FaGamepad,
   CV: FaFileAlt,
 };
@@ -148,7 +150,9 @@ export default function ContactPage() {
           {social.label === 'GitHub' && 'Repositorios y código'}
           {social.label === 'LinkedIn' && 'Perfil profesional'}
           {social.label === 'Instagram' && 'Videos, publicaciones y procesos'}
-          {social.label === 'Itch.io' && 'proyectos, demos y juegos completos'}
+          {social.label === 'Behance' && 'Portafolio de diseño y proyectos visuales'}
+          {social.label === 'ArtStation' && 'Portafolio de VFX y arte 3D'}
+          {social.label === 'Itch.io' && 'Proyectos, demos y juegos completos'}
           {social.label === 'CV' && 'Hoja de vida (PDF)'}
         </div>
       </div>

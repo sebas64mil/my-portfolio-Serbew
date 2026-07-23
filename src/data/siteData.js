@@ -170,6 +170,14 @@ socialLinks: [
       url: 'https://instagram.com/serbew__/',
     },
     {
+      label: 'Behance',
+      url: 'https://www.behance.net/juanserincon5',
+    },
+    {
+      label: 'ArtStation',
+      url: 'https://www.artstation.com/sibastemil64',
+    },
+    {
       label: 'Itch.io',
       url: 'https://serbew.itch.io',
     },
