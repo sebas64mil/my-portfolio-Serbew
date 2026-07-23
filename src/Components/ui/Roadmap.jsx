@@ -2,6 +2,15 @@ import React, { useState, useRef, useEffect, useCallback, useMemo } from 'react'
 import { roadmaps } from '../../data/roadmapData';
 import Button from './Button';
 
+const getYouTubeEmbedUrl = (url) => {
+  if (!url) return null;
+  const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*/;
+  const match = url.match(regExp);
+  return (match && match[2].length === 11) 
+    ? `https://www.youtube.com/embed/${match[2]}`
+    : null;
+};
+
 // Roadmap with animated connecting lines and completion state per node
 export default function Roadmap({ initial = 'Inventory' }) {
   const [selected, setSelected] = useState(initial);
@@ -280,22 +289,42 @@ export default function Roadmap({ initial = 'Inventory' }) {
                 <p className="font-mono text-sm mt-2 text-(--sketch-text-dim)">{n.desc}</p>
 
                 <div className="mt-4">
-                  {n.media?.url ? (
+                  {n.completed && (n.videoUrl || n.media?.url) ? (
                     <div className="rounded-lg overflow-hidden border border-(--sketch-border-solid) bg-black/20">
-                      {n.media.type === 'video' ? (
-                        <video
-                          className="w-full max-w-full block"
-                          controls
-                          src={n.media.url}
-                          poster={n.media.poster}
-                        />
-                      ) : (
-                        <img
-                          className="w-full max-w-full block object-cover"
-                          src={n.media.url}
-                          alt={n.media.alt || n.label}
-                        />
-                      )}
+                      {(() => {
+                        const url = n.videoUrl || n.media?.url;
+                        const ytEmbed = getYouTubeEmbedUrl(url);
+                        if (ytEmbed) {
+                          return (
+                            <iframe
+                              className="w-full aspect-video block"
+                              src={ytEmbed}
+                              title={n.label}
+                              frameBorder="0"
+                              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                              allowFullScreen
+                            ></iframe>
+                          );
+                        }
+                        const isVideo = n.media?.type === 'video' || url.endsWith('.mp4') || url.endsWith('.webm');
+                        if (isVideo) {
+                          return (
+                            <video
+                              className="w-full max-w-full block"
+                              controls
+                              src={url}
+                              poster={n.media?.poster}
+                            />
+                          );
+                        }
+                        return (
+                          <img
+                            className="w-full max-w-full block object-cover"
+                            src={url}
+                            alt={n.media?.alt || n.label}
+                          />
+                        );
+                      })()}
                     </div>
                   ) : (
                     <div className="rounded-lg border border-dashed border-(--sketch-border-solid) min-h-[180px] flex items-center justify-center text-center px-4 bg-black/10">
