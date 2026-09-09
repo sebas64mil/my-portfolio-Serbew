@@ -33,6 +33,14 @@ import redHunt3 from '../assets/Images/RedHunt/RedHunt3.png';
 import redHunt4 from '../assets/Images/RedHunt/RedHunt4.png';
 import redHunt5 from '../assets/Images/RedHunt/RedHunt5.png';
 
+// Imports para Juego 6: El caso de Chomping Street
+import chompingStreetCover from '../assets/Images/Juego5/ElcasoCover.png';
+import chompingStreet2 from '../assets/Images/Juego5/ElCaso1.jpg';
+import chompingStreet3 from '../assets/Images/Juego5/ElCaso2.jpg';
+import chompingStreet4 from '../assets/Images/Juego5/ElCaso3.jpg';
+import chompingStreet5 from '../assets/Images/Juego5/ElCaso4.jpg';
+
+// Imports para Proyecto Web: El Barrio
 import AndesPage1 from '../assets/Images/AndesPages/Andes1.png'; 
 import AndesPage2 from '../assets/Images/AndesPages/Andes2.png'; 
 import AndesPage3 from '../assets/Images/AndesPages/Andes3.png'; 
@@ -306,7 +314,64 @@ Este prototipo representa una aproximación práctica al desarrollo de experienc
     publishPlatform: 'github',
     publishUrl: 'https://github.com/sebas64mil/red-hunt',
     gameTypes: ['Aprendizaje', 'TCP','3D','Multijugador']
-  }
+  },
+
+
+{
+  id: 'game-6',
+  category: 'Game',
+  title: 'El Caso de Chomping Street',
+  summary: 'Aventura detectivesca 2D desarrollada para la Sanda Game Jam 2026, donde deberás explorar una misteriosa mansión, resolver minijuegos y reunir fragmentos para descubrir qué fue robado.',
+  coverImage: chompingStreetCover,
+  youtubeUrl: 'https://youtu.be/oQXgYy-Fhj4?si=pVw-XRwC60DS53fI',
+  tools: ['Unity', 'C#', 'GitHub', 'Git'],
+
+extendedDetails: `
+
+**El Caso de Chomping Street** es un videojuego **2D de aventura y misterio**, desarrollado en equipo durante la **Sanda Game Jam 2026** bajo la temática **"Fragmentos"**, entre el 19 y el 23 de agosto.
+
+El juego combina exploración, investigación y minijuegos, llevando al jugador a investigar una misteriosa mansión para descubrir qué fue robado.
+
+#### Historia
+
+La historia sigue a **Luis**, un detective que llega a la mansión del **Sr. Rodríguez** tras recibir un reporte de robo. Para descubrir qué ocurrió, deberá explorar la mansión, encontrar pistas y reunir diferentes **fragmentos** que le permitirán desbloquear la computadora del Sr. Rodríguez y acceder a la información oculta.
+
+> Explorá la mansión, resolvé divertidos minijuegos y seguí las pistas para descubrir qué ocurrió.
+
+#### Jugabilidad
+
+- 🕵️ **Exploración** e investigación de la mansión.
+- 🔎 **Búsqueda de pistas** para avanzar en el caso.
+- 🧩 **Minijuegos** relacionados con la investigación.
+- 🧩 **Recolección de fragmentos**.
+- 💻 **Desbloqueo de la computadora** del Sr. Rodríguez.
+- 🖱️ Interacción mediante **click izquierdo**.
+
+#### Mi participación
+
+Participé como **Tech Artist**, trabajando en los aspectos técnicos relacionados con la integración y presentación visual del juego dentro de Unity.
+
+Mi rol consistió en servir como puente entre las necesidades artísticas y la implementación técnica, apoyando la integración de los recursos creados por el equipo y la resolución de problemas técnicos durante el desarrollo.
+
+#### Equipo
+
+- 🎨 **Arte 2D y gestión:** Candela Llorens.
+- 💻 **Programación:** Andrés Flórez.
+- 🛠️ **Tech Art:** Serbew.
+- 🖼️ **UI Art:** BlueWakon.
+- 🧠 **Game Design:** Todo el equipo.
+
+El proyecto fue desarrollado bajo las restricciones de tiempo de una **Game Jam**, priorizando la creación de una experiencia jugable y completa dentro del plazo establecido.
+
+`,
+
+  images: [chompingStreet2, chompingStreet3, chompingStreet4, chompingStreet5],
+  publishPlatform: 'itchio',
+  publishUrl: 'https://candellorens.itch.io/el-caso-de-chomping-street',
+  gameTypes: ['Minijuegos', 'Jam', '2D', 'Sanda']
+}
+
+
 ];
 
 export const systemsProjects = [
