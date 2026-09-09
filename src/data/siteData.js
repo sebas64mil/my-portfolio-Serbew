@@ -29,10 +29,12 @@ import {
 
 } from 'react-icons/tb';
 
+import { FaWordpress } from "react-icons/fa6";
+
 
 import { RiTailwindCssFill } from "react-icons/ri";
 
-import { MdSportsEsports } from "react-icons/md";
+import { MdSportsEsports,MdOutlineWeb  } from "react-icons/md";
 
 import { SiVrchat,
           SiDavinciresolve 
@@ -134,6 +136,8 @@ skills: [
   { name: 'Vite', icon: TbBrandVite },
   { name: 'Node.js', icon: FaNodeJs },
   { name: 'Vue.js', icon: FaVuejs },
+  { name: 'WordPress', icon: FaWordpress },
+  { name: 'Web Design', icon: MdOutlineWeb },
 ],
     },
     extras: {

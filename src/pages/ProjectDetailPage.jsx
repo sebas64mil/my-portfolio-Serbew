@@ -6,7 +6,7 @@ import Button from '../Components/ui/Button';
 import GridBackground from '../Components/graphics/GridBackground';
 import { webProjects, gameProjects } from '../data/projectsData';
 import { siteData } from '../data/siteData';
-import { FaGamepad, FaGithub } from 'react-icons/fa';
+import { FaGamepad, FaGithub, FaWordpress } from 'react-icons/fa';
 import ReactMarkdown from 'react-markdown';
 
 export default function ProjectDetailPage() {
@@ -189,8 +189,10 @@ export default function ProjectDetailPage() {
             <img 
               src={project.coverImage} 
               alt={project.title} 
-              className={`w-full h-full object-cover absolute inset-0 transition-opacity duration-1000 opacity-35 sm:opacity-0 ${
-                videoEnded ? 'sm:opacity-45' : ''
+              className={`w-full h-full object-cover absolute inset-0 transition-opacity duration-1000 ${
+                youtubeId
+                  ? `opacity-35 sm:opacity-0 ${videoEnded ? 'sm:opacity-45' : ''}`
+                  : 'opacity-60 sm:opacity-100'
               }`} 
             />
           )}
@@ -255,6 +257,19 @@ export default function ProjectDetailPage() {
                   >
                     <span className="flex items-center gap-2">
                       <FaGamepad className="text-base" /> Jugar en Itch.io
+                    </span>
+                  </Button>
+                ) : project.publishPlatform === 'WordPress' ? (
+                  <Button 
+                    href={project.publishUrl} 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    variant="fancy-primary"
+                    size="md"
+                    className="flex items-center gap-2"
+                  >
+                    <span className="flex items-center gap-2">
+                      <FaWordpress className="text-base" /> Ver Pagina
                     </span>
                   </Button>
                 ) : (

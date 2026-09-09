@@ -33,49 +33,56 @@ import redHunt3 from '../assets/Images/RedHunt/RedHunt3.png';
 import redHunt4 from '../assets/Images/RedHunt/RedHunt4.png';
 import redHunt5 from '../assets/Images/RedHunt/RedHunt5.png';
 
+import AndesPage1 from '../assets/Images/AndesPages/Andes1.png'; 
+import AndesPage2 from '../assets/Images/AndesPages/Andes2.png'; 
+import AndesPage3 from '../assets/Images/AndesPages/Andes3.png'; 
+import AndesPage4 from '../assets/Images/AndesPages/Andes4.png'; 
+
 export const webProjects = [
-  {
-    id: 'web-1',
-    category: 'Web',
-    title: 'Sistema de pedidos para restaurante',
-    summary: 'Sistema inspirado en procesos reales de restaurantes para optimizar la comunicación entre meseros y cocina',
-    coverImage: null,
-    youtubeUrl: 'https://youtu.be/7kKMODi9Vtg',
-    tools: ['React', 'Node.js', 'Express', 'MongoDB'],
-    extendedDetails: 'Un sistema completo diseñado para agilizar las operaciones en restaurantes de alto volumen. Cuenta con paneles en tiempo real para la cocina, interfaz táctil para meseros y un sistema de facturación integrado.',
-    images: [],
-    publishPlatform: 'github',
-    publishUrl: 'https://github.com/sebas64mil',
-    gameTypes: ['Aprendizaje', 'Conceptos']
-  },
-  {
-    id: 'web-2',
-    category: 'Web',
-    title: 'Simulación AR de entrenamiento físico',
-    summary: 'Recrear ejercicios físicos comunes en un entorno de realidad aumentada para entrenamiento en casa.',
-    coverImage: null,
-    youtubeUrl: 'https://youtu.be/7kKMODi9Vtg',
-    tools: ['React', 'Three.js', 'Tailwind'],
-    extendedDetails: 'Aplicación web interactiva que utiliza la cámara del dispositivo para superponer un entrenador virtual en realidad aumentada, guiando al usuario a través de rutinas de ejercicio con feedback en tiempo real.',
-    images: [],
-    publishPlatform: 'github',
-    publishUrl: 'https://github.com/sebas64mil',
-    gameTypes: ['Aprendizaje', 'Conceptos']
-  },
-  {
-    id: 'web-3',
-    category: 'Web',
-    title: 'Aun en toma de decisiones',
-    summary: 'Pendiente de decidir el próximo proyecto web, posiblemente algo relacionado con visualización de datos o una aplicación interactiva.',
-    coverImage: null,
-    youtubeUrl: 'https://youtu.be/7kKMODi9Vtg',
-    tools: [],
-    extendedDetails: 'Próximamente se añadirá un nuevo proyecto web innovador a esta sección.',
-    images: [],
-    publishPlatform: 'github',
-    publishUrl: 'https://github.com/sebas64mil',
-    gameTypes: ['Aprendizaje', 'Conceptos']
-  }
+{
+  id: 'web-1',
+  category: 'Web',
+  title: 'El Barrio: Una Ciencia de Vivir Juntos',
+  summary: 'Landing page interactiva para presentar experiencias de realidad aumentada, audiovisuales e interactivas desarrolladas en conjunto por la Universidad de San Buenaventura y la Universidad de los Andes.',
+  coverImage: AndesPage3,
+  youtubeUrl: null,
+  tools: ['WordPress', 'Figma'],
+  extendedDetails: `
+**El Barrio: Una Ciencia de Vivir Juntos** es una **landing page interactiva** desarrollada como parte de un convenio entre la **Universidad de San Buenaventura** y la **Universidad de los Andes**, cuyo objetivo fue presentar y reunir diferentes experiencias digitales y audiovisuales realizadas en conjunto.
+
+La página funciona como un espacio central para dar a conocer los diferentes proyectos desarrollados durante el convenio, permitiendo a los visitantes explorar las experiencias de una manera visual, organizada y accesible.
+
+#### Experiencias presentadas
+
+La landing page reúne diferentes tipos de contenidos y experiencias desarrolladas dentro del proyecto:
+
+- 📱 **Cinco experiencias de Realidad Aumentada (AR).**
+- 🎬 **Cortometrajes** desarrollados durante el proyecto.
+- 🎥 **Videos y piezas audiovisuales.**
+- 🖱️ **Experiencias interactivas y contenidos digitales.**
+- 🌐 Diferentes propuestas desarrolladas a partir de la colaboración entre ambas universidades.
+
+Uno de los componentes principales de la página fue la presentación de las **experiencias de realidad aumentada**, permitiendo que los visitantes conocieran las diferentes propuestas y accedieran a ellas desde un mismo espacio.
+
+#### Diseño y desarrollo
+
+El proyecto fue planteado como una **landing page enfocada en la presentación de experiencias**, por lo que el diseño buscó priorizar la organización del contenido, la navegación y el impacto visual de los diferentes proyectos.
+
+El proceso de diseño se realizó utilizando **Figma**, definiendo la estructura visual, la distribución de los contenidos y la forma en que las diferentes experiencias serían presentadas antes de llevarlas a la implementación web mediante **WordPress**.
+
+La página fue estructurada para que cada experiencia pudiera tener su propio espacio dentro del sitio, manteniendo una identidad visual coherente mientras se presentaban formatos de contenido diferentes, como experiencias AR, videos y cortometrajes.
+
+#### Mi participación
+
+Participé como **co-creador de la landing page**, involucrándome directamente en el proceso de conceptualización, diseño y desarrollo de la plataforma junto con el equipo del proyecto.
+
+Mi trabajo estuvo enfocado en transformar la idea de reunir las diferentes experiencias del convenio en una **plataforma web funcional y visualmente atractiva**, trabajando con **Figma** para la propuesta y organización visual, y **WordPress** para la implementación de la landing page.
+`,
+  images: [AndesPage1, AndesPage2, AndesPage4],
+  publishPlatform: 'WordPress',
+  publishUrl: 'https://elbarriopre.uniandes.edu.co/#Seccion',
+  gameTypes: ['AR', 'Diseño Web', 'WordPress', 'Landing Page']
+},
 ];
 
 export const gameProjects = [
