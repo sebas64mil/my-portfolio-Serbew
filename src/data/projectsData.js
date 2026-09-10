@@ -36,9 +36,9 @@ import redHunt5 from '../assets/Images/RedHunt/RedHunt5.png';
 // Imports para Juego 6: El caso de Chomping Street
 import chompingStreetCover from '../assets/Images/Juego5/ELCasoCover.png';
 import chompingStreet2 from '../assets/Images/Juego5/ELCaso1.jpg';
-import chompingStreet3 from '../assets/Images/Juego5/ElCaso2.jpg';
-import chompingStreet4 from '../assets/Images/Juego5/ElCaso3.jpg';
-import chompingStreet5 from '../assets/Images/Juego5/ElCaso4.jpg';
+import chompingStreet3 from '../assets/Images/Juego5/ELCaso2.jpg';
+import chompingStreet4 from '../assets/Images/Juego5/ELCaso3.jpg';
+import chompingStreet5 from '../assets/Images/Juego5/ELCaso4.jpg';
 
 // Imports para Proyecto Web: El Barrio
 import AndesPage1 from '../assets/Images/AndesPages/Andes1.png'; 
