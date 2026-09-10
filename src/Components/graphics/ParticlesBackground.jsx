@@ -84,7 +84,7 @@ export default function ParticlesBackground({ color = '#00f0ff', count = 300, bl
       window.removeEventListener('resize', onResize);
       geometry.dispose();
       material.dispose();
-      renderer.forceContextLoss();
+      renderer.dispose();
       if (renderer.domElement) renderer.domElement.remove();
     };
   }, [color, count, blur]);

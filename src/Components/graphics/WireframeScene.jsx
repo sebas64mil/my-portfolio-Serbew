@@ -25,6 +25,8 @@ function WireframeScene() {
     const timer = new THREE.Timer();
 
     let sharedMaterial = null;
+    let disposed = false;
+    let rafId = null;
     const rotatableMeshes = [];
 
     // Load GLB
@@ -33,6 +35,7 @@ function WireframeScene() {
     loader.load(
       url,
       (gltf) => {
+        if (disposed) return;
         const model = gltf.scene || gltf.scenes[0];
         // Create and apply wireframe shader material
         sharedMaterial = createWireframeMaterial('#00f0ff', 1.6);
@@ -82,7 +85,9 @@ function WireframeScene() {
         scene.add(model);
       },
       undefined,
-      (err) => console.error('GLTF load error:', err)
+      (err) => {
+        if (!disposed) console.error('GLTF load error:', err);
+      }
     );
 
     const mouse = new THREE.Vector2(0, 0);
@@ -110,6 +115,7 @@ function WireframeScene() {
     onResize();
 
     function animate(timestamp) {
+      if (disposed) return;
       timer.update(timestamp);
       const delta = timer.getDelta();
       const elapsed = timer.getElapsed();
@@ -132,16 +138,18 @@ function WireframeScene() {
       camera.lookAt(0, 0.8, 0);
 
       renderer.render(scene, camera);
-      requestAnimationFrame(animate);
+      rafId = requestAnimationFrame(animate);
     }
 
     animate();
 
     return () => {
+      disposed = true;
+      if (rafId !== null) cancelAnimationFrame(rafId);
       window.removeEventListener('pointermove', onPointerMove);
       window.removeEventListener('resize', onResize);
-      renderer.forceContextLoss();
       renderer.domElement && renderer.domElement.remove();
+      renderer.dispose();
       scene.traverse((o) => {
         if (o.isMesh) {
           o.geometry && o.geometry.dispose();
