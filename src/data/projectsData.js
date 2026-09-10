@@ -34,7 +34,7 @@ import redHunt4 from '../assets/Images/RedHunt/RedHunt4.png';
 import redHunt5 from '../assets/Images/RedHunt/RedHunt5.png';
 
 // Imports para Juego 6: El caso de Chomping Street
-import chompingStreetCover from '../assets/Images/Juego5/ElcasoCover.png';
+import chompingStreetCover from '../assets/Images/Juego5/ElCasoCover.png';
 import chompingStreet2 from '../assets/Images/Juego5/ElCaso1.jpg';
 import chompingStreet3 from '../assets/Images/Juego5/ElCaso2.jpg';
 import chompingStreet4 from '../assets/Images/Juego5/ElCaso3.jpg';
